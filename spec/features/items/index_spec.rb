@@ -43,7 +43,18 @@ RSpec.describe 'As any kind of user,', type: :feature do
         expect(page).to_not have_content(@item_1.name)
       end
     end
-    it "item name is link to item's show page"
+    it "item name is link to item's show page" do
+
+      visit items_path
+
+      within("#item-#{@item_1.id}") do
+        expect(page).to have_link(@item_1.name, href: item_path(@item_1))
+      end
+
+      within("#item-#{@item_2.id}") do
+        expect(page).to have_link(@item_2.name, href: item_path(@item_2))
+      end
+    end
     it "item image is link to item's show page"
     context "there are no items in database"
     context "there are no active items in database"
