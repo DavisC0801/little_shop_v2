@@ -3,7 +3,7 @@ class User < ApplicationRecord
 
   validates :email, uniqueness: true, presence: true
   validates_presence_of :password, :role, :active, :address, :city, :state, :zip, require: true
-
+it {should validate_numericality_of(:role).only_integer}
   has_many :orders
   has_many :items
 end
