@@ -15,12 +15,25 @@ RSpec.describe "As a registered user" do
       expect(current_path).to eq(user_path(@user))
     end
 
-    it "shows me all data expect password" do
+    it "shows me all data except password" do
+      visit user_path(@user)
 
+      within("#user_info") do
+        expect(page).to have_content("Name: #{@user.name}")
+        expect(page).to have_content("E-Mail: #{@user.email}")
+        expect(page).to have_content("Address: #{@user.address}")
+        expect(page).to have_content("City: #{@user.city}")
+        expect(page).to have_content("State: #{@user.state}")
+        expect(page).to have_content("Zip: #{@user.zip}")
+      end
     end
 
     it "shows a link to edit profile data" do
+      visit user_path(@user)
 
+      within("#user_info") do
+        expect(page).to have_link("Edit your information")
+      end
     end
   end
 end
