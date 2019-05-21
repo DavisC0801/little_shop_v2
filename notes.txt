@@ -1,0 +1,4 @@
+Roles: 0 - visitor/default
+1 - Admin
+2 - Merchant
+3 - Registered User
