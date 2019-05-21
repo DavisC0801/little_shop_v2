@@ -1,0 +1,9 @@
+<ul id="user-<%= @user.id %>-info">
+  <li>Name: <%= @user.name %></li>
+  <li>E-Mail: <%= @user.email %></li>
+  <li>Address: <%= @user.address %></li>
+  <li>City: <%= @user.city %></li>
+  <li>State: <%= @user.state %></li>
+  <li>Zip: <%= @user.zip %></li>
+  <li><%= link_to("Edit your information", edit_user_path(@user)) %></li>
+<ul>
