@@ -12,7 +12,6 @@ RSpec.describe 'As any kind of user,', type: :feature do
     end
 
     it "I see all items in the system that are active" do
-      @item_4.deactivate
 
       visit items_path
 
@@ -21,8 +20,29 @@ RSpec.describe 'As any kind of user,', type: :feature do
       expect(page).to have_content(@item_3.name)
       expect(page).to_not have_content(@item_4.name)
     end
-    
-    it "it displays items attributes for each item"
+
+    it "it displays items attributes for each item" do
+
+      visit items_path
+
+      within("#item-#{@item_1.id}") do
+        expect(page).to have_content(@item_1.name)
+        expect(page).to have_css("img[src='#{@item_1.image}']")
+        expect(page).to have_content(@item_1.user.name)
+        expect(page).to have_content(@item_1.inventory)
+        expect(page).to have_content(@item_1.price)
+        expect(page).to_not have_content(@item_2.name)
+      end
+
+      within("#item-#{@item_2.id}") do
+        expect(page).to have_content(@item_2.name)
+        expect(page).to have_css("img[src='#{@item_2.image}']")
+        expect(page).to have_content(@item_2.user.name)
+        expect(page).to have_content(@item_2.inventory)
+        expect(page).to have_content(@item_2.price)
+        expect(page).to_not have_content(@item_1.name)
+      end
+    end
     it "item name is link to item's show page"
     it "item image is link to item's show page"
     context "there are no items in database"
