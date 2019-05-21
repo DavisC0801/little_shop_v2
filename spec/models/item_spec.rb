@@ -25,6 +25,12 @@ describe Item, type: :model do
     it {should have_many(:orders).through(:order_items)}
   end
 
+  describe "Class Methods" do
+    it ".all_active" do
+      expect(Item.all_active.count).to eq(3)
+    end
+  end
+
   describe "Instance Methods" do
     it "#deactivate" do
       @item_1.deactivate
