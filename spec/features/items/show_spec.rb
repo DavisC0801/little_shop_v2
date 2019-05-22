@@ -19,7 +19,7 @@ RSpec.describe 'As any kind of user,', type: :feature do
       expect(page).to have_content(@item_1.price)
     end
 
-    it "it displays average amount of time it takes merchant to fulfill item"
+    xit "it displays average amount of time it takes merchant to fulfill item"
     it "it displays a link to add this item to cart"
   end
 end
