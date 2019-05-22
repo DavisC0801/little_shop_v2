@@ -22,6 +22,7 @@ RSpec.describe "As a registered user" do
       city: "Denver", state: "Colorado", zip: 12345)
       allow_any_instance_of(UsersController).to receive(:current_user).and_return(@user)
     end
+
     it "shows link to edit profile" do
       visit profile_path
 
@@ -32,6 +33,7 @@ RSpec.describe "As a registered user" do
 
     it "displays user data" do
       visit profile_edit_path
+
       expect(find_field('user_name').value).to eq @user.name
       expect(find_field('user_password').value).to eq nil
       expect(find_field('user_address').value).to eq @user.address
@@ -43,15 +45,29 @@ RSpec.describe "As a registered user" do
 
     it "lets me edit user data" do
       visit profile_edit_path
+
       fill_in "user_name", with: "Patrick"
       fill_in "user_email", with: "Patrick@gmail.com"
       fill_in "user_password", with: "Gobbletygoock"
+      fill_in "user_confirm_password", with: "Gobbletygoock"
+
       click_button  "Submit Changes"
+
       expect(current_path).to eq(profile_path)
       expect(page).to have_content("Patrick")
       expect(page).to_not have_content("Chris")
       expect(page).to have_content("Patrick@gmail.com")
       expect(page).to have_content("Your profile has been updated.")
+    end
+
+    it "leaving password blank when editing profile" do
+      expected = @user.password
+      visit profile_edit_path
+      fill_in "user_name", with: "Patrick"
+      fill_in "user_email", with: "Patrick@gmail.com"
+      click_button  "Submit Changes"
+      expect(current_path).to eq(profile_path)
+      expect(@user.password).to eq(expected)
     end
   end
 end
