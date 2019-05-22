@@ -1,15 +1,16 @@
 Rails.application.routes.draw do
-  root to: 'welcome#index'
+  root 'welcome#index'
 
   resources :items, only: [:index, :show]
 
   resources :merchants, only: [:index]
 
-  resources :carts, only: [:index]
+  get '/cart', to: 'carts#index', as: :cart
 
   get '/login', to: 'sessions#new', as: :login
 
-  resources :users, only: [:new, :edit]
-
   get '/profile', to: 'users#show', as: :profile
+
+  get '/register', to: 'users#new', as: :register
+
 end

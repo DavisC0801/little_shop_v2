@@ -12,6 +12,7 @@ describe User, type: :model do
     it {should validate_presence_of(:state)}
     it {should validate_presence_of(:zip)}
     it {should validate_numericality_of(:role).only_integer}
+    it {should validate_confirmation_of(:password)}
   end
 
   describe "Relationships" do

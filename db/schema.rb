@@ -10,17 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190520220438) do
+ActiveRecord::Schema.define(version: 20190521231857) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "items", force: :cascade do |t|
     t.string "name"
-    t.boolean "active"
+    t.boolean "active", default: true
     t.decimal "price"
     t.text "description"
-    t.string "image"
+    t.string "image", default: "https://img.etimg.com/thumb/msid-64749432,width-643,imgsize-242955,resizemode-4/art-stealing-thief-thinkstockphotos-459021285.jpg"
     t.integer "inventory"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 20190520220438) do
   create_table "order_items", force: :cascade do |t|
     t.integer "quantity"
     t.decimal "price"
-    t.boolean "fulfilled"
+    t.boolean "fulfilled", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "order_id"
@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 20190520220438) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.integer "status"
+    t.integer "status", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
@@ -51,8 +51,8 @@ ActiveRecord::Schema.define(version: 20190520220438) do
   create_table "users", force: :cascade do |t|
     t.string "email"
     t.string "password_digest"
-    t.integer "role"
-    t.boolean "active"
+    t.integer "role", default: 0
+    t.boolean "active", default: true
     t.string "name"
     t.string "address"
     t.string "city"
