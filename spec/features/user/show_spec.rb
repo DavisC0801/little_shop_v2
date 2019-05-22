@@ -8,14 +8,14 @@ RSpec.describe "As a registered user" do
       city: "Denver", state: "Colorado", zip: 12345)
     end
 
-    it "loads a page" do
+    xit "loads a page" do
       visit profile_path(@user)
 
       expect(page.status_code).to eq(200)
       expect(current_path).to eq(profile_path(@user))
     end
 
-    it "shows me all data except password" do
+    xit "shows me all data except password" do
       visit profile_path(@user)
 
       within("#user-#{@user.id}-info") do
@@ -28,7 +28,7 @@ RSpec.describe "As a registered user" do
       end
     end
 
-    it "shows a link to edit profile data" do
+    xit "shows a link to edit profile data" do
       visit profile_path(@user)
 
       within("#user-#{@user.id}-info") do
@@ -36,7 +36,7 @@ RSpec.describe "As a registered user" do
       end
     end
 
-    it "shows a 404 page if invalid user_id is entered" do
+    xit "shows a 404 page if invalid user_id is entered" do
       visit profile_path(@user[:id] + 50)
 
       expect(current_path).to eq(profile_path(@user[:id] + 50))
