@@ -76,5 +76,132 @@ RSpec.describe "As a visitor" do
 
       expect(page).to have_content("Password confirmation doesn't match Password")
     end
+
+    scenario "I do not fill in this form completely, I am returned to the registration page" do
+      visit root_path
+
+      click_on "Register"
+
+      fill_in "Name", with: " "
+      fill_in "Address", with: "123 Donut St"
+      fill_in "City", with: "Denver"
+      fill_in "State", with: "Colorado"
+      fill_in "Zip", with: 80201
+      fill_in "Email", with: "loganiscool@loljk.com"
+      fill_in "Password", with: "logandonuts15"
+      fill_in "Password confirmation", with: "logandonuts15"
+
+      click_on "Create User"
+      expect(current_path).to eq(register_path)
+      expect(page).to have_content("Name can't be blank")
+    end
+
+    scenario "I do not fill in form completely; address" do
+      visit root_path
+
+      click_on "Register"
+
+      fill_in "Name", with: "Logan"
+      fill_in "Address", with: " "
+      fill_in "City", with: "Denver"
+      fill_in "State", with: "Colorado"
+      fill_in "Zip", with: 80201
+      fill_in "Email", with: "loganiscool@loljk.com"
+      fill_in "Password", with: "logandonuts15"
+      fill_in "Password confirmation", with: "logandonuts15"
+
+      click_on "Create User"
+      expect(page).to have_content("Address can't be blank")
+    end
+
+    scenario "I do not fill in form completely; city" do
+      visit root_path
+
+      click_on "Register"
+
+      fill_in "Name", with: "Logan"
+      fill_in "Address", with: "123 Donut St "
+      fill_in "City", with: " "
+      fill_in "State", with: "Colorado"
+      fill_in "Zip", with: 80201
+      fill_in "Email", with: "loganiscool@loljk.com"
+      fill_in "Password", with: "logandonuts15"
+      fill_in "Password confirmation", with: "logandonuts15"
+
+      click_on "Create User"
+      expect(page).to have_content("City can't be blank")
+    end
+
+    scenario "I do not fill in form completely; state" do
+      visit root_path
+
+      click_on "Register"
+
+      fill_in "Name", with: "Logan"
+      fill_in "Address", with: "123 Donut St "
+      fill_in "City", with: "Denver"
+      fill_in "State", with: " "
+      fill_in "Zip", with: 80201
+      fill_in "Email", with: "loganiscool@loljk.com"
+      fill_in "Password", with: "logandonuts15"
+      fill_in "Password confirmation", with: "logandonuts15"
+
+      click_on "Create User"
+      expect(page).to have_content("State can't be blank")
+    end
+
+    scenario "I do not fill in form completely; zip" do
+      visit root_path
+
+      click_on "Register"
+
+      fill_in "Name", with: "Logan"
+      fill_in "Address", with: "123 Donut St "
+      fill_in "City", with: "Denver"
+      fill_in "State", with: "Colorado"
+      fill_in "Zip", with: " "
+      fill_in "Email", with: "loganiscool@loljk.com"
+      fill_in "Password", with: "logandonuts15"
+      fill_in "Password confirmation", with: "logandonuts15"
+
+      click_on "Create User"
+      expect(page).to have_content("Zip can't be blank")
+    end
+
+    scenario "I do not fill in form completely; email" do
+      visit root_path
+
+      click_on "Register"
+
+      fill_in "Name", with: "Logan"
+      fill_in "Address", with: "123 Donut St"
+      fill_in "City", with: "Denver"
+      fill_in "State", with: "Colorado"
+      fill_in "Zip", with: 80201
+      fill_in "Email", with: " "
+      fill_in "Password", with: "logandonuts15"
+      fill_in "Password confirmation", with: "logandonuts15"
+
+      click_on "Create User"
+      expect(page).to have_content("Email can't be blank")
+    end
+
+    scenario "I do not fill in form completely; password" do
+      visit root_path
+
+      click_on "Register"
+
+      fill_in "Name", with: "Logan"
+      fill_in "Address", with: "123 Donut St "
+      fill_in "City", with: "Denver"
+      fill_in "State", with: "Colorado"
+      fill_in "Zip", with: 80201
+      fill_in "Email", with: "loganiscool@loljk.com"
+      fill_in "Password", with: " "
+      fill_in "Password confirmation", with: "logandonuts15"
+
+      click_on "Create User"
+      expect(page).to have_content("Password can't be blank")
+    end
   end
 end
