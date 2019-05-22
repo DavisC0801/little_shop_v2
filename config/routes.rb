@@ -12,4 +12,7 @@ Rails.application.routes.draw do
   resources :users, only: [:new, :edit]
 
   get '/profile', to: 'users#show', as: :profile
+  get '/profile/edit', to: 'users#edit'
+  put '/profile/edit', to: 'users#update'
+
 end
