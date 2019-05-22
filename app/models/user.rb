@@ -10,4 +10,6 @@ class User < ApplicationRecord
 
   has_many :orders
   has_many :items
+
+  enum role: %w(user admin merchant)
 end

@@ -3,14 +3,9 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
-<<<<<<< Updated upstream
-  def show
-    @user = User.find_by_id(params[:format])
-    render file: "/public/404", status: 404 unless @user
-  end
-=======
   def create
    @user = User.new(user_params)
+   # binding.pry
    if @user.save
      flash[:message] = "Welcome, #{@user.name}!"
      redirect_to profile_path
@@ -21,14 +16,13 @@ class UsersController < ApplicationController
  end
 
  def show
-   
+   @user = User.find_by_id(params[:format])
+   render file: "/public/404", status: 404 unless @user
  end
 
  private
 
    def user_params
-     params.require(:user).permit(:name, :address, :city, :state, :zip, :email, :password)
+     params.require(:user).permit(:name, :address, :city, :state, :zip, :email, :password, :password_confirmation)
    end
-
->>>>>>> Stashed changes
 end

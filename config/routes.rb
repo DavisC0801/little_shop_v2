@@ -13,4 +13,8 @@ Rails.application.routes.draw do
 
   get '/register', to: 'users#new', as: :register
 
+  resources :users, only: [:create]
+
+  get '/profile/edit', to: 'users#edit', as: :profile_edit
+
 end
