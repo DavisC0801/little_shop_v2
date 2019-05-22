@@ -9,9 +9,9 @@ RSpec.describe 'As a visitor,', type: :feature do
         expect(page).to have_link("Home", href: root_path)
         expect(page).to have_link("Items For Sale", href: items_path)
         expect(page).to have_link("Merchants", href: merchants_path)
-        expect(page).to have_link("My Shopping Cart", href: carts_path)
+        expect(page).to have_link("My Shopping Cart", href: cart_path)
         expect(page).to have_link("Log In", href: login_path)
-        expect(page).to have_link("Register", href: new_user_path)
+        expect(page).to have_link("Register", href: register_path)
       end
     end
 
@@ -45,7 +45,7 @@ RSpec.describe 'As a visitor,', type: :feature do
 
         click_link "My Shopping Cart"
 
-        expect(current_path).to eq(carts_path)
+        expect(current_path).to eq(cart_path)
       end
 
       it "when I click on 'Log In', I go to a log in form" do
@@ -61,7 +61,7 @@ RSpec.describe 'As a visitor,', type: :feature do
 
         click_link "Register"
 
-        expect(current_path).to eq(new_user_path)
+        expect(current_path).to eq(register_path)
       end
     end
   end
