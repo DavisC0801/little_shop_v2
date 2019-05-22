@@ -20,6 +20,6 @@ RSpec.describe 'As any kind of user,', type: :feature do
     end
 
     xit "it displays average amount of time it takes merchant to fulfill item"
-    it "it displays a link to add this item to cart"
+    xit "it displays a link to add this item to cart"
   end
 end
