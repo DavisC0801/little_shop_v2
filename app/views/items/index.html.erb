@@ -1,0 +1,15 @@
+<% if @items.empty? %>
+  <h1>There are no items for sale.</h1>
+<% else %>
+  <h1>All Items</h1>
+
+  <% @items.each do |item| %>
+    <section id="item-<%= item.id %>">
+      <p><%= link_to item.name, item_path(item) %></p>
+      <p><%= link_to image_tag(item.image, style: "width:200px;height:200px;", alt: item.image), item_path(item) %></p>
+      <p><%= item.user.name %></p>
+      <p><%= item.inventory %></p>
+      <p><%= item.price %></p>
+    </section>
+  <% end %>
+<% end %>
