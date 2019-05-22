@@ -12,7 +12,7 @@
   <%= f.text_field :state, required: true %><br></br>
 
   <%= f.label :zip %>
-  <%= f.number_field :zip, type: :number, min: 5, max: 5, required: true %><br></br>
+  <%= f.number_field :zip, type: :number, minlength: 5, maxlength: 5, required: true %><br></br>
 
   <%= f.label :email %>
   <%= f.text_field :email, required: true, :pattern => '[^@]+@[^@]+\.[a-zA-Z]{2,6}'%><br></br>
