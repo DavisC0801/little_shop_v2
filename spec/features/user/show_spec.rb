@@ -9,14 +9,14 @@ RSpec.describe "As a registered user" do
     end
 
     it "loads a page" do
-      visit user_path(@user)
+      visit profile_path(@user)
 
       expect(page.status_code).to eq(200)
-      expect(current_path).to eq(user_path(@user))
+      expect(current_path).to eq(profile_path(@user))
     end
 
     it "shows me all data except password" do
-      visit user_path(@user)
+      visit profile_path(@user)
 
       within("#user-#{@user.id}-info") do
         expect(page).to have_content("Name: #{@user.name}")
@@ -29,7 +29,7 @@ RSpec.describe "As a registered user" do
     end
 
     it "shows a link to edit profile data" do
-      visit user_path(@user)
+      visit profile_path(@user)
 
       within("#user-#{@user.id}-info") do
         expect(page).to have_link("Edit your information")
@@ -37,9 +37,9 @@ RSpec.describe "As a registered user" do
     end
 
     it "shows a 404 page if invalid user_id is entered" do
-      visit user_path(@user[:id] + 50)
+      visit profile_path(@user[:id] + 50)
 
-      expect(current_path).to eq(user_path(@user[:id] + 50))
+      expect(current_path).to eq(profile_path(@user[:id] + 50))
       expect(page.status_code).to eq(404)
       expect(page).to_not have_content("Name: #{@user.name}")
       expect(page).to_not have_content("E-Mail: #{@user.email}")
