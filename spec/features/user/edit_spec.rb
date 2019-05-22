@@ -45,12 +45,13 @@ RSpec.describe "As a registered user" do
       visit profile_edit_path
       fill_in "user_name", with: "Patrick"
       fill_in "user_email", with: "Patrick@gmail.com"
+      fill_in "user_password", with: "Gobbletygoock"
       click_button  "Submit Changes"
       expect(current_path).to eq(profile_path)
       expect(page).to have_content("Patrick")
-      expect(page).to_not have_content(@user.name)
+      expect(page).to_not have_content("Chris")
       expect(page).to have_content("Patrick@gmail.com")
-      expect(page).to have_content("Your Data is Updated")
+      expect(page).to have_content("Your profile has been updated.")
     end
   end
 end
