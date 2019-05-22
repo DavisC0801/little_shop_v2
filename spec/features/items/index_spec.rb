@@ -69,7 +69,7 @@ RSpec.describe 'As any kind of user,', type: :feature do
         expect(current_path).to eq(item_path(@item_1))
       end
     end
-    
+
     context "there are no items in database" do
       before { Item.destroy_all }
 
@@ -77,7 +77,7 @@ RSpec.describe 'As any kind of user,', type: :feature do
 
         visit items_path
 
-        expect(page).to have_content("There are no items for sell.")
+        expect(page).to have_content("There are no items for sale.")
       end
     end
 
@@ -91,7 +91,7 @@ RSpec.describe 'As any kind of user,', type: :feature do
 
         visit items_path
 
-        expect(page).to have_content("There are no items for sell.")
+        expect(page).to have_content("There are no items for sale.")
       end
     end
   end
