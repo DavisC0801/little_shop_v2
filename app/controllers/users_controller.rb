@@ -5,7 +5,6 @@ class UsersController < ApplicationController
 
   def create
    @user = User.new(user_params)
-   # binding.pry
    if @user.save
      flash[:message] = "Welcome, #{@user.name}!"
      redirect_to profile_path
