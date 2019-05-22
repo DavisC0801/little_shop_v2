@@ -14,7 +14,8 @@ class UsersController < ApplicationController
 
   def update
     user = User.find(current_user.id)
-    user.update(user_params)
+    current_user.update(user_params)
+    flash[:message] = "Your profile has been updated."
     redirect_to profile_path
   end
 
