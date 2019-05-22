@@ -9,5 +9,7 @@ Rails.application.routes.draw do
 
   get '/login', to: 'sessions#new', as: :login
 
-  resources :users, only: [:new]
+  resources :users, only: [:new, :edit]
+
+  get '/profile', to: 'users#show', as: :profile
 end
