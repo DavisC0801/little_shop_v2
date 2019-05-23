@@ -49,7 +49,7 @@ RSpec.describe "As a registered user" do
       fill_in "user_name", with: "Patrick"
       fill_in "user_email", with: "Patrick@gmail.com"
       fill_in "user_password", with: "Gobbletygoock"
-      fill_in "user_confirm_password", with: "Gobbletygoock"
+      fill_in "user_password_confirmation", with: "Gobbletygoock"
 
       click_button  "Submit Changes"
 
