@@ -23,5 +23,14 @@ RSpec.describe 'As a merchant,', type: :feature do
         expect(page).to_not have_link("Register", href: register_path)
       end
     end
+
+    describe "I see 1 new link in the navigation bar" do
+      it "when I click on a link, I go to correct page" do
+        visit items_path
+
+        click_link "Dashboard"
+        expect(current_path).to eq(dashboard_path)
+      end
+    end
   end
 end

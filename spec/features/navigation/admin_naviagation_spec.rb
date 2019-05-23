@@ -9,7 +9,7 @@ RSpec.describe 'As a admin,', type: :feature do
     end
 
     it "with admin dashboard, profile and logout links instead of shopping cart, login and register" do
-      visit profile_path
+      visit root_path
 
       within(".navbar-nav") do
         expect(page).to have_link("Home", href: root_path)
@@ -21,6 +21,23 @@ RSpec.describe 'As a admin,', type: :feature do
         expect(page).to_not have_link("My Shopping Cart", href: cart_path)
         expect(page).to_not have_link("Log In", href: login_path)
         expect(page).to_not have_link("Register", href: register_path)
+      end
+    end
+
+    describe "I see 1 new link in the navigation bar" do
+      it "when I click on a link, I go to correct page" do
+        visit items_path
+
+        click_link "Dashboard"
+        expect(current_path).to eq(admin_dashboard_path)
+      end
+    end
+
+    it "should not show merchant's dashboard in navigation bar" do
+      visit root_path
+
+      within(".navbar-nav") do
+        expect(page).to_not have_link("Dashboard", href: dashboard_path)
       end
     end
   end

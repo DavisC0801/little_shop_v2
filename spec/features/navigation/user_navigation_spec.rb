@@ -34,13 +34,25 @@ RSpec.describe 'As a user,', type: :feature do
       expect(page).to have_content("Logged in as #{@user.name}")
     end
 
+    describe "I see 2 new links in the navigation bar" do
+      it "when I click on a link, I go to correct page" do
+        visit items_path
+
+        click_link "Profile"
+        expect(current_path).to eq(profile_path)
+
+        click_link "Log Out"
+        expect(current_path).to eq(root_path)
+      end
+    end
+
     context "but when I logout," do
       xit "it doesn't display my name" do
         visit profile_path
 
         #log off placeholder
         #case edge for UserStory3
-        
+
         expect(page).to_not have_content("Logged in as #{@user.name}")
       end
     end
