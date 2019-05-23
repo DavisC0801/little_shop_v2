@@ -31,9 +31,12 @@
             <%= link_to "Merchants", merchants_path, {class: "nav-link"} %>
           </li>
           <% unless current_merchant? || current_admin? %>
-          <li class="nav-item active">
-            <%= link_to "My Shopping Cart", cart_path, {class: "nav-link"} %>
-          </li>
+            <li class="nav-item active">
+              <%= link_to "My Shopping Cart", cart_path, {class: "nav-link"} %>
+            </li>
+            <li class="nav-item active">
+              <%= link_to "Profile", profile_path, {class: "nav-link"} %>
+            </li>
           <% end %>
           <% if current_user %>
             <% if current_merchant? %>
@@ -47,9 +50,6 @@
               </li>
             <% end %>
 
-            <li class="nav-item active">
-              <%= link_to "Profile", profile_path, {class: "nav-link"} %>
-            </li>
             <li class="nav-item active">
               <%= link_to "Log Out", logout_path, {class: "nav-link"} %>
             </li>
