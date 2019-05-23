@@ -22,4 +22,8 @@ Rails.application.routes.draw do
   get '/profile/edit', to: 'users#edit', as: :profile_edit
 
   patch '/profile/edit', to: 'users#update'
+
+  namespace :admin do
+    get '/dashboard', to: 'users#dashboard'
+  end
 end
