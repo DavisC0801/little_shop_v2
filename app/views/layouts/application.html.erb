@@ -33,17 +33,28 @@
           <li class="nav-item active">
             <%= link_to "My Shopping Cart", cart_path, {class: "nav-link"} %>
           </li>
-          <li class="nav-item active">
-            <%= link_to "Log In", login_path, {class: "nav-link"} %>
-          </li>
-          <li class="nav-item active">
-            <%= link_to "Register", register_path, {class: "nav-link"} %>
-          </li>
+          <% if current_user %>
+            <li class="nav-item active">
+              <%= link_to "Profile", profile_path, {class: "nav-link"} %>
+            </li>
+            <li class="nav-item active">
+              <%= link_to "Log Out", logout_path, {class: "nav-link"} %>
+            </li>
+          <% else %>
+            <li class="nav-item active">
+              <%= link_to "Log In", login_path, {class: "nav-link"} %>
+            </li>
+            <li class="nav-item active">
+              <%= link_to "Register", register_path, {class: "nav-link"} %>
+            </li>
+          <% end %>
         </ul>
       </div>
     </nav>
 
-
+    <% if current_user %>
+      <p>Logged in as <%= current_user.name %></p>
+    <% end %>
 
     <%= yield %>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
