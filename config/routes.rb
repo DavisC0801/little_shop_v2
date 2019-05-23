@@ -17,4 +17,6 @@ Rails.application.routes.draw do
 
   get '/profile/edit', to: 'users#edit', as: :profile_edit
 
+  resources :carts, only: [:create]
+
 end
