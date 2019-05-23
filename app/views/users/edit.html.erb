@@ -1,24 +1,27 @@
 <%= form_for @user, url: profile_edit_path, method: :patch do |f| %>
   <%= f.label :name %>
-  <%= f.text_field :name %>
-
-  <%= f.label :email %>
-  <%= f.text_field :email %>
-
-  <%= f.label :password %>
-  <%= f.password_field :password %>
-
-  <%= f.label :city %>
-  <%= f.text_field :city %>
-
-  <%= f.label :state %>
-  <%= f.text_field :state %>
+  <%= f.text_field :name, required: true %><br></br>
 
   <%= f.label :address %>
-  <%= f.text_field :address %>
+  <%= f.text_field :address, required: true %><br></br>
+
+  <%= f.label :city %>
+  <%= f.text_field :city, required: true %><br></br>
+
+  <%= f.label :state %>
+  <%= f.text_field :state, required: true %><br></br>
 
   <%= f.label :zip %>
-  <%= f.text_field :zip %>
+  <%= f.number_field :zip, type: :number, minlength: 5, maxlength: 5, required: true %><br></br>
+
+  <%= f.label :email %>
+  <%= f.text_field :email, required: true, :pattern => '[^@]+@[^@]+\.[a-zA-Z]{2,6}'%><br></br>
+
+  <%= f.label :password %>
+  <%= f.password_field :password %><br></br>
+
+  <%= f.label :password_confirmation %>
+  <%= f.password_field :password_confirmation %><br></br>
 
   <%= f.submit "Submit Changes" %>
 <% end %>
