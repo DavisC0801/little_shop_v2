@@ -1,4 +1,4 @@
-<%= form_for @user, url: profile_edit_path, method: :put do |f| %>
+<%= form_for @user, url: profile_edit_path, method: :patch do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name %>
 
