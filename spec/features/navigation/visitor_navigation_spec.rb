@@ -16,51 +16,25 @@ RSpec.describe 'As a visitor,', type: :feature do
     end
 
     describe "I see 6 links in the navigation bar" do
-      it "when I click on 'Home', I go to home page" do
+      it "when I click on a link, I go to correct page" do
         visit items_path
 
         click_link "Home"
-
         expect(current_path).to eq(root_path)
-      end
-
-      it "when I click on 'Items For Sale', I go to item's index page" do
-        visit root_path
 
         click_link "Items For Sale"
-
         expect(current_path).to eq(items_path)
-      end
-
-      it "when I click on 'Merchants', I go to merchant's index page" do
-        visit root_path
 
         click_link "Merchants"
-
         expect(current_path).to eq(merchants_path)
-      end
-
-      it "when I click on 'My Shopping Cart', I go to my shopping cart's index page" do
-        visit root_path
 
         click_link "My Shopping Cart"
-
         expect(current_path).to eq(cart_path)
-      end
-
-      it "when I click on 'Log In', I go to a log in form" do
-        visit root_path
 
         click_link "Log In"
-
         expect(current_path).to eq(login_path)
-      end
-
-      it "when I click on 'Register', I go to a user registration form" do
-        visit root_path
 
         click_link "Register"
-
         expect(current_path).to eq(register_path)
       end
     end
