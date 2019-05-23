@@ -13,6 +13,8 @@ Rails.application.routes.draw do
 
   get '/profile', to: 'users#show', as: :profile
 
+  get '/dashboard', to: 'merchants#dashboard', as: :dashboard
+
   get '/register', to: 'users#new', as: :register
 
   resources :users, only: [:create]
