@@ -30,17 +30,20 @@
           <li class="nav-item active">
             <%= link_to "Merchants", merchants_path, {class: "nav-link"} %>
           </li>
-
-          <% unless current_merchant? %>
+          <% unless current_merchant? || current_admin? %>
           <li class="nav-item active">
             <%= link_to "My Shopping Cart", cart_path, {class: "nav-link"} %>
           </li>
           <% end %>
-
           <% if current_user %>
             <% if current_merchant? %>
               <li class="nav-item active">
                 <%= link_to "Dashboard", dashboard_path, {class: "nav-link"} %>
+              </li>
+            <% end %>
+            <% if current_admin? %>
+              <li class="nav-item active">
+                <%= link_to "Dashboard", admin_dashboard_path, {class: "nav-link"} %>
               </li>
             <% end %>
 
