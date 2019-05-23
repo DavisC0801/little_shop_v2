@@ -30,7 +30,7 @@ RSpec.describe "As a visitor" do
 
       expect(new_user.name).to eq("Logan")
       expect(current_path).to eq(profile_path)
-      expect(page).to have_content("Welcome, #{new_user.name}!")
+      expect(page).to have_content("Welcome, #{new_user.name}! You're now registered and logged in!")
     end
 
     it "should not create a new user with a saved email" do
