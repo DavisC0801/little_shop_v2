@@ -9,6 +9,26 @@ RSpec.describe "As a visitor" do
       expect(current_path).to eq(login_path)
     end
   end
+
+  describe "When I visit login path And I submit invalid information" do
+    it "redirects to the login page and I see a messaging telling me credentials were incorrect" do
+
+      @user = User.create!(email: "user@user.com", password: "user", \
+      role: 0, active: true, name: "User", address: "123 Fake St", \
+      city: "Denver", state: "Colorado", zip: 12345)
+
+      visit login_path
+
+      fill_in "Email", with: "user5@user.com"
+      fill_in "Password", with: "user"
+
+      click_button "Log In"
+
+      expect(current_path).to eq(login_path)
+
+      expect(page).to have_content("Your credentials was entered incorrectly.")
+    end
+  end
 end
 
 RSpec.describe "As a registered user" do
