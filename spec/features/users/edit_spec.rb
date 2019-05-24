@@ -20,6 +20,9 @@ RSpec.describe "As a registered user" do
       @user = User.create!(email: "notmi_reelemail@nope.com", password: "test", \
       role: 0, active: true, name: "Chris", address: "123 Fake St", \
       city: "Denver", state: "Colorado", zip: 12345)
+      @gracie = User.create!(email: "laura_grace_davis@gmail.com", password: "1283florida_miners;", \
+      role: 0, active: true, name: "Laura", address: "99836 Wilchester Dr.", \
+      city: "Houston", state: "Texas", zip: 77079)
       allow_any_instance_of(UsersController).to receive(:current_user).and_return(@user)
     end
 
@@ -68,6 +71,14 @@ RSpec.describe "As a registered user" do
       click_button  "Submit Changes"
       expect(current_path).to eq(profile_path)
       expect(@user.reload.password).to eq(expected)
+    end
+
+    it "entering email already in db elicits error message" do
+      visit profile_edit_path
+      fill_in "user_email", with: "laura_grace_davis@gmail.com"
+      click_button  "Submit Changes"
+      expect(current_path).to eq(profile_edit_path)
+      expect(page).to have_content("Email has already been taken")
     end
   end
 end
