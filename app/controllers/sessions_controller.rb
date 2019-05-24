@@ -16,8 +16,10 @@ class SessionsController < ApplicationController
       flash[:message] = "Invalid Email" if !user
     end
   end
-  
+
   def destroy
+    session[:user_id] = nil
+    flash[:message] = "You're now logged off!"
     redirect_to root_path
   end
 end
