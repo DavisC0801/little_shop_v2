@@ -58,7 +58,11 @@ RSpec.describe "As a registered user," do
   describe "merchant can click 'Log Out'" do
     before :each do
       @merchant = User.create!(email: "merchant1@gmail.com", password: "password1", role: 2, active: true, name: "Merchant 1", address: "1 Fake St", city: "city 1", state: "state 1", zip: "12345")
-      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@merchant)
+
+      visit login_path
+      fill_in "Email", with: @merchant.email
+      fill_in "Password", with: @merchant.password
+      click_button "Log In"
     end
 
     it "and directed to home page" do
@@ -79,7 +83,11 @@ RSpec.describe "As a registered user," do
   describe "admin can click 'Log Out'" do
     before :each do
       @admin = User.create!(email: "admin1@gmail.com", password: "password1", role: 1, active: true, name: "Admin 1", address: "1 Fake St", city: "city 1", state: "state 1", zip: "12345")
-      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@admin)
+
+      visit login_path
+      fill_in "Email", with: @admin.email
+      fill_in "Password", with: @admin.password
+      click_button "Log In"
     end
 
     it "and directed to home page" do
