@@ -9,16 +9,19 @@ class UsersController < ApplicationController
   end
 
   def create
-   @user = User.new(user_params)
-   if @user.save
-     flash[:message] = "Welcome, #{@user.name}!"
+   user = User.new(user_params)
+   if user.save
+     session[:user_id] = user.id
+     flash[:message] = "Welcome, #{user.name}! You're now registered and logged in!"
      redirect_to profile_path
    else
-     flash[:message] = @user.errors.full_messages.first
-     redirect_back(fallback_location: register_path)
+     user_params_no_email = user_params.except(:email)
+     flash[:message] = user.errors.full_messages.first
+     @user = User.new(user_params_no_email)
+     render :new
    end
  end
-  
+
   def edit
     @user = current_user
   end

@@ -30,7 +30,7 @@ RSpec.describe "As a visitor" do
 
       expect(new_user.name).to eq("Logan")
       expect(current_path).to eq(profile_path)
-      expect(page).to have_content("Welcome, #{new_user.name}!")
+      expect(page).to have_content("Welcome, #{new_user.name}! You're now registered and logged in!")
     end
 
     it "should not create a new user with a saved email" do
@@ -56,7 +56,17 @@ RSpec.describe "As a visitor" do
 
       expect(user).to eq(new_user)
       expect(page).to have_content("Email has already been taken")
+      expect(current_path).to eq(users_path)
+      expect(page).to_not have_content("loganiscool@loljk.com")   
     end
+    # As a visitor
+    # When I visit the user registration page
+    # If I fill out the registration form
+    # But include an email address already in the system
+    # Then I am returned to the registration page
+    # My details are not saved and I am not logged in
+    # The form is filled in with all previous data except the email field and password fields
+    # I see a flash message telling me the email address is already in use
 
     it "confirms the password and prompts to re enter if not correct" do
       visit root_path
@@ -92,7 +102,7 @@ RSpec.describe "As a visitor" do
       fill_in "Password confirmation", with: "logandonuts15"
 
       click_on "Create User"
-      expect(current_path).to eq(register_path)
+      expect(current_path).to eq(users_path)
       expect(page).to have_content("Name can't be blank")
     end
 
