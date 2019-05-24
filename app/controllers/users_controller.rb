@@ -24,7 +24,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    if current_user.update(user_params)
+    if current_user.update!(user_params)
       flash[:message] = "Your profile has been updated."
       redirect_to profile_path
     else
@@ -36,6 +36,10 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :address, :city, :state, :zip, :email, :password, :password_confirmation)
+    if params[:user][:password] == "" || params[:user][:password] == nil
+      params.require(:user).permit(:name, :address, :city, :state, :zip, :email)
+    else
+      params.require(:user).permit(:name, :address, :city, :state, :zip, :email, :password, :password_confirmation)
+    end
   end
 end
