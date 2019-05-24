@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root to: 'welcome#index'
 
   get '/login', to: 'sessions#new'
+  post '/login', to: 'sessions#create'
   get '/logout', to: 'sessions#destroy'
 
   get '/register', to: 'users#new'
@@ -13,7 +14,7 @@ Rails.application.routes.draw do
   scope :profile, as: :profile do
     resources :orders, only: [:index, :show]
   end
-
+  
   get '/cart', to: 'cart#show'
 
   get '/dashboard', to: 'merchants#show'
