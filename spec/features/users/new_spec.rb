@@ -56,8 +56,10 @@ RSpec.describe "As a visitor" do
 
       expect(user).to eq(new_user)
       expect(page).to have_content("Email has already been taken")
+      expect(current_path).to eq(users_path)
+      expect(page).to_not have_content("loganiscool@loljk.com")
     end
-
+    
     it "confirms the password and prompts to re enter if not correct" do
       visit root_path
 
@@ -92,7 +94,7 @@ RSpec.describe "As a visitor" do
       fill_in "Password confirmation", with: "logandonuts15"
 
       click_on "Create User"
-      expect(current_path).to eq(register_path)
+      expect(current_path).to eq(users_path)
       expect(page).to have_content("Name can't be blank")
     end
 
