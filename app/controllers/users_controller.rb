@@ -39,7 +39,6 @@ class UsersController < ApplicationController
     if params[:user][:password] == "" || params[:user][:password] == nil
       params.require(:user).permit(:name, :address, :city, :state, :zip, :email)
     elsif User.find_by(email: params[:user][:email]) == params[:user][:email]
-      flash[:message] = "Email has already been taken."
     else
       params.require(:user).permit(:name, :address, :city, :state, :zip, :email, :password, :password_confirmation)
     end
