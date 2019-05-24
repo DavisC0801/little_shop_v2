@@ -38,7 +38,7 @@ class UsersController < ApplicationController
   def user_params
     if params[:user][:password] == "" || params[:user][:password] == nil
       params.require(:user).permit(:name, :address, :city, :state, :zip, :email)
-    elsif User.find_by(email: params[:user][:email]) == params[:user][:email]
+    
     else
       params.require(:user).permit(:name, :address, :city, :state, :zip, :email, :password, :password_confirmation)
     end
