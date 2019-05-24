@@ -17,12 +17,14 @@ class SessionsController < ApplicationController
       redirect_to dashboard_path if user.role == "merchant"
       redirect_to root_path if user.role == "admin"
     else
-      flash[:message] = "Invalid Password" if user
-      flash[:message] = "Invalid Email" if !user
+      flash[:message] = "Your credentials were entered incorrectly."
+      redirect_to login_path
     end
   end
 
   def destroy
+    session[:user_id] = nil
+    flash[:message] = "You're now logged off!"
     redirect_to root_path
   end
 end

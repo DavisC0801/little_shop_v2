@@ -13,7 +13,6 @@ class UsersController < ApplicationController
    if user.save
      session[:user_id] = user.id
      flash[:message] = "Welcome, #{user.name}! You're now registered and logged in!"
-     
      redirect_to profile_path
    else
      user_params_no_email = user_params.except(:email)
