@@ -16,7 +16,7 @@ class SessionsController < ApplicationController
       flash[:message] = "Invalid Email" if !user
     end
   end
-
+  
   def destroy
     redirect_to root_path
   end

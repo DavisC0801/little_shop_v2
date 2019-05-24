@@ -3,7 +3,7 @@ class MerchantsController < ApplicationController
 
   end
 
-  def dashboard
+  def show
 
   end
 end

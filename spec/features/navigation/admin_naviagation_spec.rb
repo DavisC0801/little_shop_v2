@@ -8,7 +8,7 @@ RSpec.describe 'As a admin,', type: :feature do
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@admin)
     end
 
-    it "with admin dashboard, profile and logout links instead of shopping cart, login and register" do
+    it "with admin dashboard and logout links instead of profile, shopping cart, login and register" do
       visit root_path
 
       within(".navbar-nav") do
@@ -16,8 +16,8 @@ RSpec.describe 'As a admin,', type: :feature do
         expect(page).to have_link("Items For Sale", href: items_path)
         expect(page).to have_link("Merchants", href: merchants_path)
         expect(page).to have_link("Dashboard", href: admin_dashboard_path)
-        expect(page).to have_link("Profile", href: profile_path)
         expect(page).to have_link("Log Out", href: logout_path)
+        expect(page).to_not have_link("Profile", href: profile_path)
         expect(page).to_not have_link("My Shopping Cart", href: cart_path)
         expect(page).to_not have_link("Log In", href: login_path)
         expect(page).to_not have_link("Register", href: register_path)
