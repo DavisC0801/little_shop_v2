@@ -31,6 +31,17 @@ RSpec.describe "As a registered user" do
 
       expect(page).to have_content("Welcome, #{@user.name}! You're now logged in!")
     end
+
+    context "when I am logged in" do
+      it "redirects to profile and gives a message" do
+        allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
+        visit login_path
+
+        expect(current_path).to eq(profile_path)
+
+        expect(page).to have_content("You are already logged in.")
+      end
+    end
   end
 
   describe "as a merchant" do
@@ -52,6 +63,17 @@ RSpec.describe "As a registered user" do
 
       expect(page).to have_content("Welcome, #{@merchant.name}! You're now logged in!")
     end
+
+    context "when I am logged in" do
+      it "redirects to profile and gives a message" do
+        allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@merchant)
+        visit login_path
+
+        expect(current_path).to eq(dashboard_path)
+
+        expect(page).to have_content("You are already logged in.")
+      end
+    end
   end
 
   describe "as an admin" do
@@ -72,6 +94,17 @@ RSpec.describe "As a registered user" do
       expect(current_path).to eq(root_path)
 
       expect(page).to have_content("Welcome, #{@admin.name}! You're now logged in!")
+    end
+
+    context "when I am logged in" do
+      it "redirects to profile and gives a message" do
+        allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@admin)
+        visit login_path
+
+        expect(current_path).to eq(root_path)
+
+        expect(page).to have_content("You are already logged in.")
+      end
     end
   end
 end
