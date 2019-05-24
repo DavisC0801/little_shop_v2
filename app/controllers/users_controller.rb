@@ -40,7 +40,6 @@ class UsersController < ApplicationController
       params.require(:user).permit(:name, :address, :city, :state, :zip, :email)
     elsif User.find_by(email: params[:user][:email]) == params[:user][:email]
       flash[:message] = "Email has already been taken."
-      redirect_back(fallback_location: profile_edit_path)
     else
       params.require(:user).permit(:name, :address, :city, :state, :zip, :email, :password, :password_confirmation)
     end
