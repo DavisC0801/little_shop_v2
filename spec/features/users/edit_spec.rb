@@ -67,7 +67,7 @@ RSpec.describe "As a registered user" do
       fill_in "user_email", with: "Patrick@gmail.com"
       click_button  "Submit Changes"
       expect(current_path).to eq(profile_path)
-      expect(@user.password).to eq(expected)
+      expect(@user.reload.password).to eq(expected)
     end
   end
 end
