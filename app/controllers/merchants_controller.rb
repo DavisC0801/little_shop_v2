@@ -4,6 +4,6 @@ class MerchantsController < ApplicationController
   end
 
   def show
-
+    @merchant = User.find(current_user.id)
   end
 end
