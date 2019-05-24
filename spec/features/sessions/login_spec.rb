@@ -26,7 +26,7 @@ RSpec.describe "As a visitor" do
 
       expect(current_path).to eq(login_path)
 
-      expect(page).to have_content("Your credentials was entered incorrectly.")
+      expect(page).to have_content("Your credentials were entered incorrectly.")
     end
   end
 end
