@@ -1,6 +1,11 @@
 class SessionsController < ApplicationController
   def new
-
+    if current_user != nil
+      flash[:message] = "You are already logged in."
+      redirect_to profile_path if current_user.role == "user"
+      redirect_to dashboard_path if current_user.role == "merchant"
+      redirect_to root_path if current_user.role == "admin"
+    end
   end
 
   def create
@@ -16,7 +21,7 @@ class SessionsController < ApplicationController
       flash[:message] = "Invalid Email" if !user
     end
   end
-  
+
   def destroy
     redirect_to root_path
   end
