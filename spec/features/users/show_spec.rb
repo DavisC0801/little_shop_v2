@@ -33,15 +33,13 @@ RSpec.describe "As a registered user" do
     it "shows a link to edit profile data" do
       visit profile_path
 
-      within("#user-#{@user.id}-info") do
-        expect(page).to have_link("Edit your information")
-      end
+      expect(page).to have_link("Edit Profile")
     end
   end
 end
 
 RSpec.describe "As an unregistered user" do
-  it "shows a 404 page if invalid user_id is entered" do  
+  it "shows a 404 page if invalid user_id is entered" do
     visit profile_path
 
     expect(current_path).to eq(profile_path)
