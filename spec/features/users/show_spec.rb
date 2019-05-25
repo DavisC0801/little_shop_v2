@@ -7,7 +7,7 @@ RSpec.describe "As a registered user" do
       role: 0, active: true, name: "Chris", address: "123 Fake St", \
       city: "Denver", state: "Colorado", zip: 12345)
 
-      allow_any_instance_of(UsersController).to receive(:current_user).and_return(@user)
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
     end
 
     it "loads a page" do
@@ -37,14 +37,6 @@ RSpec.describe "As a registered user" do
     end
 
     describe "when I have orders placed in the system" do
-      before do
-        order_1 = @user.orders.create
-        order_2 = @user.orders.create
-        artwork_1 = order_1.items.create(name: "A Sunday Afternoon on the Island of La Grande Jatte", price: 56_000_000 , description: "design, composition, tension, balance, light, and harmony", image: "https://bit.ly/1C53Ad6", inventory: 1)
-        artwork_2 = order_1.items.create(name: "Autumn Rhythm", price: 30_000_000 , description: "chaos", image: "https://bit.ly/2VNDT0D", inventory: 1 )
-        artwork_3 = order_2.items.create(name: "Self-Portrait with Thorn Necklace and Hummingbird", price: 16_000_000 , description: "natural beauty", image: "https://bit.ly/1O5A1gr", inventory: 1)
-      end
-
       it "I see a link on my profile page called 'My Orders'" do
         visit profile_path
 
@@ -55,7 +47,7 @@ RSpec.describe "As a registered user" do
         visit profile_path
 
         click_link("My Orders")
-        
+
         expect(current_path).to eq(profile_orders_path)
       end
     end
