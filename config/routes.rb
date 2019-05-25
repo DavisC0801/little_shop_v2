@@ -19,9 +19,7 @@ Rails.application.routes.draw do
 
   patch '/profile/edit', to: 'users#update'
 
-  scope '/user', as: 'profile' do
-    resources :orders
+  scope 'profile', as: 'profile' do
+    resources :orders, only: [:index]
   end
-
-  # get '/profile/orders', to: '', as: :profile_orders
 end
