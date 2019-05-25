@@ -37,11 +37,35 @@ RSpec.describe "As a registered user" do
         expect(page).to have_link("Edit your information")
       end
     end
+
+    describe "when I have orders placed in the system" do
+      before do
+        order_1 = @user.orders.create
+        order_2 = @user.orders.create
+        artwork_1 = order_1.items.create(name: "A Sunday Afternoon on the Island of La Grande Jatte", price: 56_000_000 , description: "design, composition, tension, balance, light, and harmony", image: "https://bit.ly/1C53Ad6", inventory: 1)
+        artwork_2 = order_1.items.create(name: "Autumn Rhythm", price: 30_000_000 , description: "chaos", image: "https://bit.ly/2VNDT0D", inventory: 1 )
+        artwork_3 = order_2.items.create(name: "Self-Portrait with Thorn Necklace and Hummingbird", price: 16_000_000 , description: "natural beauty", image: "https://bit.ly/1O5A1gr", inventory: 1)
+      end
+
+      it "I see a link on my profile page called 'My Orders'" do
+        visit profile_path
+
+        expect(page).to have_link("My Orders")
+      end
+
+      it "When I click 'My Orders' link, I am taken to /profile/orders/" do
+        visit profile_path
+
+        click_link("My Orders")
+        
+        expect(current_path).to eq(profile_orders_path)
+      end
+    end
   end
 end
 
 RSpec.describe "As an unregistered user" do
-  it "shows a 404 page if invalid user_id is entered" do  
+  it "shows a 404 page if invalid user_id is entered" do
     visit profile_path
 
     expect(current_path).to eq(profile_path)
