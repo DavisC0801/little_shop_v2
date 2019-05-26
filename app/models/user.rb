@@ -10,4 +10,12 @@ class User < ApplicationRecord
   has_many :items
 
   enum role: %w(user admin merchant)
+
+  def top_items(limit)
+    items.joins(:orders)
+          .where("orders.status = 2")
+          .select("order_items.quantity, items.name")
+          .order("order_items.quantity desc, items.name asc")
+          .limit(limit)
+  end
 end
