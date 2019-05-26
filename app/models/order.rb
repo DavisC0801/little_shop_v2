@@ -11,10 +11,14 @@ class Order < ApplicationRecord
     order_items.sum(:price)
   end
 
+  def total_quantity
+    items.sum(:quantity) 
+  end
+
   def self.pending_orders(current_user)
     # binding.pry
     joins(:items)
-    .select("orders.id, orders.created_at, order_items.quantity")
-    .where("orders.status = 0 and items.user_id = #{current_user.id}")
+    .select("orders.*, order_items.quantity").distinct
+    .where('orders.status' => 0, 'items.user_id' => current_user.id)
   end
 end

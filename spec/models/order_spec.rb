@@ -47,6 +47,12 @@ describe Order, type: :model do
       expect(@order_3.total_cost).to eq(77.77)
       expect(@order_6.total_cost).to eq(44.44)
     end
+
+    it ".total_quantity" do
+      expect(@order_1.total_quantity).to eq(2)
+      expect(@order_3.total_quantity).to eq(2)
+      expect(@order_6.total_quantity).to eq(2)
+    end
   end
 
   describe "Class Methods" do
@@ -83,7 +89,7 @@ describe Order, type: :model do
     it ".pending_orders" do
       @orders = Order.all
 
-      expect(@orders.pending_orders(@merchant_1)).to eq([@order_1, @order_1, @order_3, @order_6])
+      expect(@orders.pending_orders(@merchant_1)).to eq([@order_1, @order_3, @order_6])
     end
   end
 end

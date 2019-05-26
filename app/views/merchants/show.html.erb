@@ -8,11 +8,11 @@
   <li>Zip: <%= @merchant.zip %></li>
 </ul>
 <h2>Current Pending Orders</h2>
-<ul id="pending-orders">
-  <% @order_items.each do |order_item| %>
-  <li>Order ID: <%= link_to order_item.id %></li>
-  <li>Date Ordered: <%= order_item.created_at %></li>
-  <li>Quantity: <%= order_item.quantity %></li>
-  <li>Total Cost: <%= '%.2f' % order_item.total_cost %></li>
+<% @merchant_pending_orders.each do |order| %>
+<ul id="pending-orders-<%= order.id %>"
+  <li>Order ID: <%= link_to order.id, "/dashboard/orders/#{order.id}" %></li>
+  <li>Date Ordered: <%= order.created_at %></li>
+  <li>Quantity: <%= order.total_quantity %></li>
+  <li>Total Cost: $<%= '%.2f' % order.total_cost %></li>
 </ul>
 <% end %>

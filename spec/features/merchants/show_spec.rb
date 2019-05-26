@@ -61,24 +61,28 @@ RSpec.describe 'As a merchant,', type: :feature do
 
         visit dashboard_path
 
-        within("#pending-orders") do
-          expect(page).to have_content("Order ID: #{@order_item_1.id}")
-          expect(page).to have_link("Order ID: #{@order_item_1.id}")
-          expect(page).to have_content("Date Ordered: #{@order_item_1.created_at}")
-          expect(page).to have_content("Quantity: #{@order_item_1.quantity}")
-          expect(page).to have_content("Total Cost: #{@order_item_1.total_cost}")
+        within("#pending-orders-#{@order_1.id}") do
+          expect(page).to have_content("Order ID: #{@order_1.id}")
+          expect(page).to have_link("#{@order_1.id}")
+          expect(page).to have_content("Date Ordered: #{@order_1.created_at}")
+          expect(page).to have_content("Quantity: #{@order_1.total_quantity}")
+          expect(page).to have_content("Total Cost: $#{@order_1.total_cost}")
+        end
 
-          expect(page).to have_content("Order ID: #{@order_item_3.id}")
-          expect(page).to have_link("Order ID: #{@order_item_3.id}")
-          expect(page).to have_content("Date Ordered: #{@order_item_3.created_at}")
-          expect(page).to have_content("Quantity: #{@order_item_3.quantity}")
-          expect(page).to have_content("Total Cost: #{@order_item_3.total_cost}")
+        within("#pending-orders-#{@order_3.id}") do
+          expect(page).to have_content("Order ID: #{@order_3.id}")
+          expect(page).to have_link("#{@order_3.id}")
+          expect(page).to have_content("Date Ordered: #{@order_3.created_at}")
+          expect(page).to have_content("Quantity: #{@order_3.total_quantity}")
+          expect(page).to have_content("Total Cost: $#{@order_3.total_cost}")
+        end
 
-          expect(page).to have_content("Order ID: #{@order_item_6.id}")
-          expect(page).to have_link("Order ID: #{@order_item_6.id}")
-          expect(page).to have_content("Date Ordered: #{@order_item_6.created_at}")
-          expect(page).to have_content("Quantity: #{@order_item_6.quantity}")
-          expect(page).to have_content("Total Cost: #{@order_item_6.total_cost}")
+        within("#pending-orders-#{@order_6.id}") do
+          expect(page).to have_content("Order ID: #{@order_6.id}")
+          expect(page).to have_link("#{@order_6.id}")
+          expect(page).to have_content("Date Ordered: #{@order_6.created_at}")
+          expect(page).to have_content("Quantity: #{@order_6.total_quantity}")
+          expect(page).to have_content("Total Cost: $#{@order_6.total_cost}")
         end
       end
     end
