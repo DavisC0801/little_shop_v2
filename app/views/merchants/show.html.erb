@@ -12,3 +12,5 @@
   <li class="quantity_list"><%= item.name %>: <%= item.quantity %></li>
 <% end %>
 </ol>
+
+<p>You have sold <%= @merchant.sold_percentage.sold_count %> items, which is <%= @merchant_1.sold_percentage.percentage %>% of your total inventory.</p>
