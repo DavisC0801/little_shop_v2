@@ -6,3 +6,9 @@
   <li>State: <%= @merchant.state %></li>
   <li>Zip: <%= @merchant.zip %></li>
 </ul>
+
+<ol>
+<% @merchant.top_items(5).each do |item| %>
+  <li class="quantity_list"><%= item.name %>: <%= item.quantity %></li>
+<% end %>
+</ol>
