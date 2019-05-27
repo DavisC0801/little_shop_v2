@@ -1,20 +1,24 @@
-<section class="container-fluid">
-  <section class="row">
-    <% @items.each do |item| %>
+<% if @items.empty? %>
+  <h1>There are no items for sale.</h1>
+<% else %>
+  <h1>All Items</h1>
+
+  <section class="container-fluid">
+    <section class="row">
+      <% @items.each do |item| %>
       <div class='card col-12 col-md-3 col-lg-3 col-xl-3' id="item-<%= item.id %>">
-        <%= link_to image_tag(item.image, class: "card-img-top", alt: "#{item.name} image"), item_path(item), id: "image-#{item.id}" %>
+        <%= link_to image_tag(item.image, class: "card-img-top", alt: "#{item.image} image"), item_path(item), id: "image-#{item.id}" %>
         <div class="card-body">
           <h4 class="card-title"><%= link_to item.name, item_path(item) %></h4>
-          <h6 class="merchant-name"><%= item.user.name %></h6>
+          <h6 class="merchant-name">Merchant: <%= item.user.name %></h6>
           <p class="card-text mb-2 text-muted"><%= item.description %></p>
         </div>
         <ul class="list-group list-group-flush">
-          <li class="list-group-item">Current Price:
-            <%= number_to_currency(item.price) %></li>
-          <li class="list-group-item">Quantity:
-            <%= item.inventory %></li>
+          <li class="list-group-item">Item Price: <%= number_to_currency(item.price) %></li>
+          <li class="list-group-item">Inventory Count: <%= item.inventory %></li>
         </ul>
       </div>
-    <% end %>
+      <% end %>
+    </section>
   </section>
-</section>
+  <% end %>
