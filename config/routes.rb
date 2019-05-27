@@ -17,8 +17,6 @@ Rails.application.routes.draw do
     resources :orders, only: [:index, :show]
   end
 
-  get '/cart', to: 'cart#show'
-
   get '/dashboard', to: 'merchants#show'
 
   scope :dashboard, as: :dashboard do
