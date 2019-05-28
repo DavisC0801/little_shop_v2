@@ -1,3 +1,4 @@
+<h1>Greetings</h1>
 <ul id="merchant-<%= @merchant.id %>-info">
   <li>Name: <%= @merchant.name %></li>
   <li>E-Mail: <%= @merchant.email %></li>
@@ -7,10 +8,20 @@
   <li>Zip: <%= @merchant.zip %></li>
 </ul>
 
+<h2>Current Pending Orders</h2>
+<% @merchant_pending_orders.each do |order| %>
+<ul id="pending-orders-<%= order.id %>"
+  <li>Order ID: <%= link_to order.id, "/dashboard/orders/#{order.id}" %></li>
+  <li>Date Ordered: <%= order.created_at %></li>
+  <li>Quantity: <%= order.total_quantity %></li>
+  <li>Total Cost: $<%= '%.2f' % order.total_cost %></li>
+</ul>
+<% end %>
+                     
 <ol>
 <% @merchant.top_items(5).each do |item| %>
   <li class="quantity_list"><%= item.name %>: <%= item.quantity %></li>
 <% end %>
 </ol>
 
-<p>You have sold <%= @merchant.sold_percentage.sold_count %> items, which is <%= @merchant_1.sold_percentage.percentage %>% of your total inventory.</p>
+<p>You have sold <%# @merchant.sold_percentage.first.sold_count %> items, which is <%# @merchant_1.sold_percentage.sum %>% of your total inventory.</p>
