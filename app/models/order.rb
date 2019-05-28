@@ -8,11 +8,11 @@ class Order < ApplicationRecord
   enum status: %w(pending packaged shipped cancelled)
 
   def total_quantity
-    items.sum(:quantity)
+    order_items.sum(:quantity)
   end
 
   def total_cost
-    items.sum(:price)
+    order_items.sum(:price)
   end
 
   def restock_items
@@ -25,8 +25,14 @@ class Order < ApplicationRecord
     end
   end
 
-  def cancel_order
+   def cancel_order
     self.update(status: "cancelled")
   end
 
+  def self.pending_orders(current_user)
+    # binding.pry
+    joins(:items)
+    .select("orders.*, order_items.quantity").distinct
+    .where('orders.status' => 0, 'items.user_id' => current_user.id)
+  end
 end
