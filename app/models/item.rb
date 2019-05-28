@@ -18,4 +18,8 @@ class Item < ApplicationRecord
   def activate
     update_attribute(:active, true)
   end
+
+  def ordered?
+    orders != []
+  end
 end
