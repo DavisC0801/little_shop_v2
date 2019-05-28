@@ -16,20 +16,13 @@ Rails.application.routes.draw do
   scope :profile, as: :profile do
     resources :orders, only: [:index, :show]
   end
-<<<<<<< Updated upstream
-
-  get '/dashboard', to: 'merchants#show'
-
-  scope :dashboard, as: :dashboard do
-=======
-
-  get '/cart', to: 'cart#show'
 
   get '/dashboard', to: 'merchants#show'
 
   scope :dashboard, as: :dashboard, module: :merchants do
->>>>>>> Stashed changes
-    resources :items, only: [:index, :new, :edit, :show]
+    resources :items, only: [:index, :new, :edit, :show, :destroy]
+    post "/items/deactivate", to: "/merchant/items#deactivate"
+    post "/items/activate", to: "/merchant/items#activate"
     resources :orders, only: :show
   end
 
@@ -39,11 +32,8 @@ Rails.application.routes.draw do
 
   resources :users, only: [:create]
 
-<<<<<<< Updated upstream
   resources :carts, only: [:create]
 
-=======
->>>>>>> Stashed changes
   namespace :admin do
     get '/dashboard', to: 'dashboard#index'
   end

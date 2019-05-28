@@ -17,14 +17,9 @@
   <li>Total Cost: $<%= '%.2f' % order.total_cost %></li>
 </ul>
 <% end %>
-                     
+
 <ol>
 <% @merchant.top_items(5).each do |item| %>
   <li class="quantity_list"><%= item.name %>: <%= item.quantity %></li>
 <% end %>
 </ol>
-<<<<<<< Updated upstream
-
-<p>You have sold <%# @merchant.sold_percentage.first.sold_count %> items, which is <%# @merchant_1.sold_percentage.sum %>% of your total inventory.</p>
-=======
->>>>>>> Stashed changes
