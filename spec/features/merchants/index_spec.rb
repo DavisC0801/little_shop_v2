@@ -83,19 +83,19 @@ RSpec.describe "As a visitor" do
       visit merchants_path
 
       within("#merchant-#{@merchant_1.id}-info") do
-        expect(page).to have_content("Member since: #{Date.today + 1}")
+        expect(page).to have_content("Member since: #{Date.today}")
       end
       within("#merchant-#{@merchant_2.id}-info") do
-        expect(page).to have_content("Member since: #{Date.today + 2}")
+        expect(page).to have_content("Member since: #{Date.today + 1}")
       end
       within("#merchant-#{@merchant_3.id}-info") do
-        expect(page).to have_content("Member since: #{Date.today + 3}")
+        expect(page).to have_content("Member since: #{Date.today + 2}")
       end
       within("#merchant-#{@merchant_4.id}-info") do
-        expect(page).to have_content("Member since: #{Date.today + 4}")
+        expect(page).to have_content("Member since: #{Date.today + 3}")
       end
       within("#merchant-#{@merchant_5.id}-info") do
-        expect(page).to have_content("Member since: #{Date.today + 5}")
+        expect(page).to have_content("Member since: #{Date.today + 4}")
       end
     end
   end

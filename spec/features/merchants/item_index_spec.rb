@@ -12,6 +12,7 @@ RSpec.describe "As a merchant" do
       @item_5 = @merchant_1.items.create!(name: "Item 5", active: false, price: 55.55, description: "description 5", image: "https://bit.ly/2LXAlJy", inventory: 5)
       @order_1 = Order.create!(user: @user_1 , status: 0)
       @order_item_1 = OrderItem.create!(item: @item_1, order: @order_1, quantity: 1, price: @item_1.price)
+      
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@merchant_1)
     end
 
@@ -29,7 +30,7 @@ RSpec.describe "As a merchant" do
         expect(page).to have_content("Name: #{@item_1.name}")
         expect(page).to have_css("img[src='#{@item_1.image}']")
         expect(page).to have_content("Price: $#{@item_1.price}")
-        expect(page).to have_content("Inventory: $#{@item_1.inventory}")
+        expect(page).to have_content("Inventory: #{@item_1.inventory}")
         expect(page).to have_button("Edit Item")
       end
       within("#item-#{@item_2.id}-info") do
@@ -37,7 +38,7 @@ RSpec.describe "As a merchant" do
         expect(page).to have_content("Name: #{@item_2.name}")
         expect(page).to have_css("img[src='#{@item_2.image}']")
         expect(page).to have_content("Price: $#{@item_2.price}")
-        expect(page).to have_content("Inventory: $#{@item_2.inventory}")
+        expect(page).to have_content("Inventory: #{@item_2.inventory}")
         expect(page).to have_button("Edit Item")
       end
       within("#item-#{@item_3.id}-info") do
@@ -45,7 +46,7 @@ RSpec.describe "As a merchant" do
         expect(page).to have_content("Name: #{@item_3.name}")
         expect(page).to have_css("img[src='#{@item_3.image}']")
         expect(page).to have_content("Price: $#{@item_3.price}")
-        expect(page).to have_content("Inventory: $#{@item_3.inventory}")
+        expect(page).to have_content("Inventory: #{@item_3.inventory}")
         expect(page).to have_button("Edit Item")
       end
       within("#item-#{@item_4.id}-info") do
@@ -53,7 +54,7 @@ RSpec.describe "As a merchant" do
         expect(page).to have_content("Name: #{@item_4.name}")
         expect(page).to have_css("img[src='#{@item_4.image}']")
         expect(page).to have_content("Price: $#{@item_4.price}")
-        expect(page).to have_content("Inventory: $#{@item_4.inventory}")
+        expect(page).to have_content("Inventory: #{@item_4.inventory}")
         expect(page).to have_button("Edit Item")
       end
       within("#item-#{@item_5.id}-info") do
@@ -61,7 +62,7 @@ RSpec.describe "As a merchant" do
         expect(page).to have_content("Name: #{@item_5.name}")
         expect(page).to have_css("img[src='#{@item_5.image}']")
         expect(page).to have_content("Price: $#{@item_5.price}")
-        expect(page).to have_content("Inventory: $#{@item_5.inventory}")
+        expect(page).to have_content("Inventory: #{@item_5.inventory}")
         expect(page).to have_button("Edit Item")
       end
     end
