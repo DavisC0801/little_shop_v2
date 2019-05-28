@@ -1,0 +1,19 @@
+<% @merchant.items.each do |item| %>
+  <ul id="item-<%= item.id %>-info">
+    <li><%= image_tag(item.image, alt: "Picture of #{item.name}") %></li>
+    <li>ID: <%= item.id %></li>
+    <li>Name: <%= item.name %></li>
+    <li>Price: <%= number_to_currency(item.price) %></li>
+    <li>Inventory: <%= item.inventory %></li>
+    <% if item.active %>
+      <li><%= button_to "Disable Item", dashboard_items_deactivate_path %></li>
+    <% else %>
+      <li><%= button_to "Enable Item", dashboard_items_activate_path %></li>
+    <% end %>
+    <li><%= button_to "Edit Item", { action: "edit", id: item.id } %></li>
+    <% if !item.ordered? %>
+      <li><%= button_to "Delete Item", { action: "destroy", id: item.id } %></li>
+    <% end %>
+  </ul>
+<% end %>
+<%= button_to "Add new item", new_dashboard_item_path %>

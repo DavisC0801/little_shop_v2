@@ -19,6 +19,10 @@ class Item < ApplicationRecord
     update_attribute(:active, true)
   end
 
+  def ordered?
+    orders != []
+  end
+  
   def subtotal(order)
     price * order_quantity(order)
   end
