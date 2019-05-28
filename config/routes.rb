@@ -19,8 +19,6 @@ Rails.application.routes.draw do
 
   patch '/profile/orders/:id/', to: "orders#cancel"
 
-  get '/cart', to: 'cart#show'
-
   get '/dashboard', to: 'merchants#show'
 
   scope :dashboard, as: :dashboard do
@@ -34,7 +32,13 @@ Rails.application.routes.draw do
 
   resources :users, only: [:create]
 
+  resources :carts, only: [:create]
+
   namespace :admin do
     get '/dashboard', to: 'dashboard#index'
   end
+
+  get '/carts', to: 'carts#show', as: 'cart'
+  put '/carts', to: 'carts#update'
+  delete '/carts', to: 'carts#destroy'
 end

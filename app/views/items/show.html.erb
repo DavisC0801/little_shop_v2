@@ -1,7 +1,8 @@
-<h1><%= @item.name %></h1>
 
+<h1><%= @item.name %></h1>
 <p>Description: <%= @item.description %></p>
 <p><img src=<%= @item.image %> alt=<%= @item.name %> style="width:400px;height:400px;"></p>
 <p>Merchant: <%= @item.user.name %></p>
 <p>Inventory: <%= @item.inventory %></p>
-<p>Price: <%= @item.price %></p>
+<p>Price: <%= number_to_currency(@item.price) %></p>
+<p><%= button_to "Add Item", cart_path(item_id: @item.id)%><p>
