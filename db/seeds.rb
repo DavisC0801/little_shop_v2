@@ -5,8 +5,6 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-# user1 = User.create(email: 'smokingmouth@icloud.com', password_digest: 'string', role: 0, active: true, name: 'Tom Wesselmann', address: '550 Park Ave', city: 'New York City', state: 'NY', zip: 10001 )
-
 
 # Merchants
 
