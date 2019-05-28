@@ -48,11 +48,15 @@ RSpec.describe "As a merchant" do
       expect(page.all(".quantity_list")[4]).to have_content("#{@item_3.name}: #{@order_item_3.quantity}")
     end
 
-    it "shows the total quantity of items I've sold, and as a percentage against my sold units plus remaining inventory" do
-      visit dashboard_path
+    # it "shows the total quantity of items I've sold, and as a percentage against my sold units plus remaining inventory" do
+      # visit dashboard_path
 
       # expect(page).to have_content("You have sold 12 items, which is 26.7% of your total inventory.")
+<<<<<<< Updated upstream
     end
+=======
+    # end
+>>>>>>> Stashed changes
     #
     # it "top 3 states where my items were shipped, and their quantities" do
     #   visit dashboard_path

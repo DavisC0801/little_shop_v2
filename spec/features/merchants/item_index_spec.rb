@@ -12,7 +12,7 @@ RSpec.describe "As a merchant" do
       @item_5 = @merchant_1.items.create!(name: "Item 5", active: false, price: 55.55, description: "description 5", image: "https://bit.ly/2LXAlJy", inventory: 5)
       @order_1 = Order.create!(user: @user_1 , status: 0)
       @order_item_1 = OrderItem.create!(item: @item_1, order: @order_1, quantity: 1, price: @item_1.price)
-      allow_any_instance_of(ApplicationController).to receive(current_user).and_return(@merchant_1)
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@merchant_1)
     end
 
     it "shows a link to add a new item" do

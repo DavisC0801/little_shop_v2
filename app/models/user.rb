@@ -24,9 +24,13 @@ class User < ApplicationRecord
   end
 
   def sold_percentage
+<<<<<<< Updated upstream
     items.joins(:orders)
           .where("orders.status = 2")
           .group("items.id")
           .select("items.count as sold_count, sum(order_items.quantity)")
+=======
+    
+>>>>>>> Stashed changes
   end
 end
