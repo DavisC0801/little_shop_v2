@@ -4,17 +4,27 @@ class Order < ApplicationRecord
   belongs_to :user
   has_many :order_items
   has_many :items, through: :order_items
-  
+
   enum status: %w(pending packaged shipped cancelled)
+
+  def total_quantity
+    order_items.sum(:quantity)
+  end
 
   def total_cost
     order_items.sum(:price)
   end
 
-  def total_quantity
-    items.sum(:quantity) 
+  def restock_items
+    order_items.each do |order_item|
+      item = Item.find(order_item.item_id)
+      if order_item.fulfilled == true
+        item.update(inventory: (item.inventory + order_item.quantity))
+      end
+      order_item.update(fulfilled: false)
+    end
   end
-  
+
    def cancel_order
     self.update(status: "cancelled")
   end
