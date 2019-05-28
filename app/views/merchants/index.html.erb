@@ -1,0 +1,11 @@
+<ul>
+<% @merchants.each do |merchant| %>
+  <div id="merchant-<%= merchant.id %>-info">
+    <li>Name: <%= merchant.name %></li>
+    <li>City: <%= merchant.city %></li>
+    <li>State: <%= merchant.state %></li>
+    <li>Zip: <%= merchant.zip %></li>
+    <li>Member since: <%= Date.strptime(merchant.created_at.to_s) %></li>
+  </div>
+<% end %>
+</ul>
