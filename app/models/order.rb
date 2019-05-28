@@ -6,4 +6,19 @@ class Order < ApplicationRecord
   has_many :items, through: :order_items
 
   enum role: %w(pending packaged shipped cancelled)
+
+  def total_cost
+    order_items.sum(:price)
+  end
+
+  def total_quantity
+    items.sum(:quantity) 
+  end
+
+  def self.pending_orders(current_user)
+    # binding.pry
+    joins(:items)
+    .select("orders.*, order_items.quantity").distinct
+    .where('orders.status' => 0, 'items.user_id' => current_user.id)
+  end
 end
