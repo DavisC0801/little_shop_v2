@@ -41,7 +41,6 @@ class UsersController < ApplicationController
   def user_params
     if params[:user][:password] == "" || params[:user][:password] == nil
       params.require(:user).permit(:name, :address, :city, :state, :zip, :email)
-    
     else
       params.require(:user).permit(:name, :address, :city, :state, :zip, :email, :password, :password_confirmation)
     end

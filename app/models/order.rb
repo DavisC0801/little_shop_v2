@@ -4,8 +4,8 @@ class Order < ApplicationRecord
   belongs_to :user
   has_many :order_items
   has_many :items, through: :order_items
-
-  enum role: %w(pending packaged shipped cancelled)
+  
+  enum status: %w(pending packaged shipped cancelled)
 
   def total_cost
     order_items.sum(:price)
@@ -13,6 +13,10 @@ class Order < ApplicationRecord
 
   def total_quantity
     items.sum(:quantity) 
+  end
+  
+   def cancel_order
+    self.update(status: "cancelled")
   end
 
   def self.pending_orders(current_user)

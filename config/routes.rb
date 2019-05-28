@@ -17,6 +17,8 @@ Rails.application.routes.draw do
     resources :orders, only: [:index, :show]
   end
 
+  patch '/profile/orders/:id/', to: "orders#cancel"
+
   get '/dashboard', to: 'merchants#show'
 
   scope :dashboard, as: :dashboard do
