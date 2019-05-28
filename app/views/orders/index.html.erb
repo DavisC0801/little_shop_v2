@@ -5,6 +5,6 @@
     <p>Last Updated: <%= order.updated_at %></p>
     <p>Current Status: <%= order.status %></p>
     <p>Item Count: <%= order.total_quantity %></p>
-    <p>Total: <%= number_to_currency(order.grand_total) %></p><br>
+    <p>Total: <%= number_to_currency(order.total_cost) %></p><br>
   </section>
 <% end %>
