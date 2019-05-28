@@ -55,7 +55,7 @@ RSpec.describe "as a registered user", type: :feature do
       end
 
       expect(page).to have_content("#{@order_1.total_quantity}")
-      expect(page).to have_content("#{number_to_currency(@order_1.grand_total)}")
+      expect(page).to have_content("#{number_to_currency(@order_1.total_cost)}")
     end
   end
 end
