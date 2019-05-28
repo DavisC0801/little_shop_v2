@@ -1,0 +1,19 @@
+<h2>Order <%= @order.id %></h2>
+<% if @order.status == "pending" %>
+  <%= button_to "Cancel Order", profile_order_path(@order), method: :patch %>
+<% end  %>
+<p>Date Ordered: <%= @order.created_at %></p>
+<p>Last Updated: <%= @order.updated_at %></p>
+<p>Order Status: <%= @order.status %>
+<% @order.items.each do |item| %>
+  <section id="item-<%= item.id %>">
+    <p>Name: <%= item.name %></p>
+    <img src=<%= item.image %>>
+    <p>Description: <%= item.description %></p>
+    <p>Price: <%= item.price %></p>
+    <p>Quantity: <%= item.order_quantity(@order) %></p>
+    <p>Subtotal: <%= item.subtotal(@order) %></p>
+  </section>
+<% end %>
+<p>Item Count: <%= @order.total_quantity %></p>
+<p>Total: <%= number_to_currency(@order.total_cost) %></p><br>
