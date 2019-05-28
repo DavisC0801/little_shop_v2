@@ -8,21 +8,19 @@ class Order < ApplicationRecord
   enum status: %w(pending packaged shipped cancelled)
 
   def total_quantity
-    items.count
+    items.sum(:quantity)
   end
 
-  def grand_total
-    items.sum do |item|
-      item.price
-    end
+  def total_cost
+    items.sum(:price)
   end
 
-  def return_fulfilled_items
-    
-  end
-
-  def make_items_unfulfilled
+  def restock_items
     order_items.each do |order_item|
+      item = Item.find(order_item.item_id)
+      if order_item.fulfilled == true
+        item.update(inventory: (item.inventory + order_item.quantity))
+      end
       order_item.update(fulfilled: false)
     end
   end
