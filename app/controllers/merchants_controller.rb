@@ -6,6 +6,6 @@ class MerchantsController < ApplicationController
   def show
     @merchant = User.find(current_user.id)
     @merchant_pending_orders = Order.pending_orders(current_user)
-    # binding.pry
+    render file: "/public/404", status: 404 unless current_merchant?
   end
 end
