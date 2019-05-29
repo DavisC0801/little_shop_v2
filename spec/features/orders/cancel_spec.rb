@@ -3,13 +3,7 @@ require 'rails_helper'
 RSpec.describe "as a registered user", type: :feature do
   describe "when I visit an order's show page" do
     before :each do
-      @user = User.create!( email: "notmi_reelemail@nope.com",
-                            password: "test",
-                            name: "Chris",
-                            address: "123 Fake St",
-                            city: "Denver",
-                            state: "Colorado",
-                            zip: 12345 )
+      @user = User.create!( email: "notmi_reelemail@nope.com",password: "test", name: "Chris", address: "123 Fake St", city: "Denver", state: "Colorado", zip: 12345 )
 
         allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
 
@@ -22,6 +16,7 @@ RSpec.describe "as a registered user", type: :feature do
         @order_item_2 = OrderItem.create!(item: @artwork_2, order: @order_1, quantity: 1, price: @artwork_2.price, fulfilled: true)
         @order_item_3 = OrderItem.create!(item: @artwork_3, order: @order_2, quantity: 1, price: @artwork_3.price, fulfilled: true)
       end
+      
     describe "when the order status is 'pending'" do
       it "I see a button to cancel the order" do
         visit profile_order_path(@order_1)
