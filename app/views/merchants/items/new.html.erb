@@ -1,0 +1,18 @@
+<%= form_for @item do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name, required: true %><br>
+
+  <%= f.label :price %>
+  <%= f.text_field :price, type: :number, min: 0.01, step: 0.01, required: true %><br>
+
+  <%= f.label :description %>
+  <%= f.text_field :description, required: true %><br>
+
+  <%= f.label :image %>
+  <%= f.text_field :image, type: :url, value: "" %><br>
+
+  <%= f.label :inventory %>
+  <%= f.text_field :inventory, type: :number, min: 1 %><br>
+
+  <%= f.submit "Create Item"%>
+<% end %>
