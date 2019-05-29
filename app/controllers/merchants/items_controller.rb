@@ -27,4 +27,8 @@ class Merchants::ItemsController < Merchants::BaseController
   def edit
 
   end
+
+  def new
+    @item = Item.new
+  end
 end
