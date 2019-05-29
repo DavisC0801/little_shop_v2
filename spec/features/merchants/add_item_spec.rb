@@ -1,6 +1,11 @@
 require "rails_helper"
 
 RSpec.describe "As a merchant" do
+  before :each do
+    @merchant_1 = User.create!(email: "merchant1@gmail.com", password: "password1", role: 2, active: true, name: "Merchant 1", address: "1 Fake St", city: "city 1", state: "state 1", zip: "12345")
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@merchant_1)
+  end
+
   describe "when I visit my items page" do
     it "has a new item button that redirects to the new item form" do
       visit dashboard_items_path
