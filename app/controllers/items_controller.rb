@@ -18,6 +18,17 @@ class ItemsController < ApplicationController
     end
   end
 
+  def update
+    item = Item.find(params[:id])
+    if item.update(item_params)
+      flash[:message] = "#{item.name} has been updated."
+      redirect_to dashboard_items_path
+    else
+      flash[:message] = item.errors.full_messages.first
+      redirect_back(fallback_location: edit_dashboard_item_path(item))
+    end
+  end
+
   def item_params
     item_params = params.require(:item).permit(:name, :price, :description, :image, :inventory)
     item_params[:user_id] = current_user.id
