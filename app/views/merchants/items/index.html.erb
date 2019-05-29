@@ -6,9 +6,9 @@
     <li>Price: <%= number_to_currency(item.price) %></li>
     <li>Inventory: <%= item.inventory %></li>
     <% if item.active %>
-      <li><%= button_to "Disable Item", dashboard_items_deactivate_path %></li>
+      <li><%= button_to "Disable Item", dashboard_items_deactivate_path(item_id: item.id) %></li>
     <% else %>
-      <li><%= button_to "Enable Item", dashboard_items_activate_path %></li>
+      <li><%= button_to "Enable Item", dashboard_items_activate_path(item_id: item.id) %></li>
     <% end %>
     <li><%= button_to "Edit Item", { action: "edit", id: item.id } %></li>
     <% if !item.ordered? %>
