@@ -13,8 +13,8 @@ RSpec.describe "as a registered user", type: :feature do
 
         allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
 
-        @order_1 = @user.orders.create!(status: "pending")
-        @order_2 = @user.orders.create!(status: "packaged")
+        @order_1 = @user.orders.create!(status: "Pending")
+        @order_2 = @user.orders.create!(status: "Packaged")
         @artwork_1 = Item.create!(name: "A Sunday Afternoon on the Island of La Grande Jatte", price: 56000000.00 , description: "design, composition, tension, balance, light, and harmony", image: "https://bit.ly/2HBZ7e6", inventory: 1, user_id: @user.id)
         @artwork_2 = Item.create!(name: "Autumn Rhythm", price: 30000000.00 , description: "chaos", image: "https://bit.ly/2VNDT0D", inventory: 1, user_id: @user.id )
         @artwork_3 = Item.create!(name: "Self-Portrait with Thorn Necklace and Hummingbird", price: 16000000.00 , description: "natural beauty", image: "https://bit.ly/1O5A1gr", inventory: 1, user_id: @user.id)
@@ -40,7 +40,7 @@ RSpec.describe "as a registered user", type: :feature do
         expect(@artwork_1.reload.inventory).to eq(2)
         expect(@order_item_1.reload.fulfilled).to eq(false)
         expect(@order_item_2.reload.fulfilled).to eq(false)
-        expect(@order_1.reload.status).to eq("cancelled")
+        expect(@order_1.reload.status).to eq("Cancelled")
       end
     end
 
