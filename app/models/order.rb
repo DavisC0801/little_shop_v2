@@ -17,12 +17,20 @@ class Order < ApplicationRecord
 
   def restock_items
     order_items.each do |order_item|
-      item = Item.find(order_item.item_id)
-      if order_item.fulfilled == true
-        item.update(inventory: (item.inventory + order_item.quantity))
-      end
-      order_item.update(fulfilled: false)
+      update_inventory(order_item)
+      mark_unfulfilled(order_item)
     end
+  end
+
+  def update_inventory(order_item)
+    item = Item.find(order_item.item_id)
+    if order_item.fulfilled == true
+      item.update(inventory: (item.inventory + order_item.quantity))
+    end
+  end
+
+  def mark_unfulfilled(order_item)
+    order_item.update(fulfilled: false)
   end
 
    def cancel_order
