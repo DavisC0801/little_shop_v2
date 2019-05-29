@@ -5,7 +5,7 @@ class Order < ApplicationRecord
   has_many :order_items
   has_many :items, through: :order_items
 
-  enum status: %w(pending packaged shipped cancelled)
+  enum status: %w(packaged pending shipped cancelled)
 
   def total_quantity
     order_items.sum(:quantity)
