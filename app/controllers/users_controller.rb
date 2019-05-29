@@ -1,11 +1,12 @@
 class UsersController < ApplicationController
   def new
     @user = User.new
+    render file: "/public/404", status: 404 unless @user
   end
 
   def show
     @user = current_user
-    render file: "/public/404", status: 404 unless @user
+    render file: "/public/404", status: 404 unless current_user?
   end
 
   def create
@@ -24,6 +25,7 @@ class UsersController < ApplicationController
 
   def edit
     @user = current_user
+    render file: "/public/404", status: 404 unless @user
   end
 
   def update

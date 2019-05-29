@@ -64,11 +64,11 @@ describe Order, type: :model do
     end
 
     it "#cancel_order" do
-      expect(@order_1.status).to eq("pending")
+      expect(@order_1.status).to eq("Packaged")
 
       @order_1.cancel_order
 
-      expect(@order_1.reload.status).to eq("cancelled")
+      expect(@order_1.reload.status).to eq("Cancelled")
     end
 
     it "#update_order_item_fulfilled_status" do

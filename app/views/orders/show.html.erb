@@ -1,5 +1,5 @@
 <h2>Order <%= @order.id %></h2>
-<% if @order.status == "pending" %>
+<% if @order.status == "Pending" %>
   <%= button_to "Cancel Order", profile_order_path(@order), method: :patch %>
 <% end  %>
 <p>Date Ordered: <%= @order.created_at %></p>

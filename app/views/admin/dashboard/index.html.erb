@@ -1,0 +1,10 @@
+<ul>
+<% @orders.each do |order| %>
+  <div id="orders-<%= order.id %>-info">
+    <li>Order ID: <%= order.id %></li>
+    <li>Status: <%= order.status %></li>
+    <li>By: <%= link_to order.user.name, admin_user_path(order.user) %></li>
+    <li>Created at: <%= order.created_at.strftime("%-m/%-d/%y at %H:%M") %></li>
+  </div>
+<% end %>
+</ul>
