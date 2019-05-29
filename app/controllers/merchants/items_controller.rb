@@ -25,7 +25,7 @@ class Merchants::ItemsController < Merchants::BaseController
   end
 
   def edit
-
+    @item = Item.find(params[:id])
   end
 
   def new
