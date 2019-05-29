@@ -1,0 +1,31 @@
+<% if !cart = 0 %>
+ <% cart.item_and_quantity.each do |item, quantity| %>
+   <div id="item-<%= item.id %>">
+     <%= link_to item.name, item_path(item) %>
+     <%= image_tag item.image || @default_image, alt: "image of #{item.name}" %>
+     <p><%= item.user.name %></p>
+     <p><%= number_to_currency(item.price) %></p>
+     <div class="quantities" >
+     Quantity:<%= button_to "-", cart_decrease(item), method: :patch%><%= quantity %>
+       <%= button_to "+", cart_path(item), method: :patch %>
+       <%= button_to "Remove", cart_remove_path(item), method: :patch%>
+     </div>
+     <p>Subtotal: <%= number_to_currency(cart.subtotal(item)) %></p>
+   </div>
+ <% end %>
+
+ <h2>Total: <%= number_to_currency(cart.total) %></h2>
+
+ <% if current_user?  %>
+   <%= button_to "Check Out", cart_path %>
+ <% end %>
+ <%= button_to "Empty Cart", { controller: :carts, action: :destroy }, method: :delete %>
+<% else %>
+ <h4>Your cart is empty.</h4>
+<% end %>
+
+<% if !current_user  %>
+ <div id="visitor-checkout">
+   <h4>Please <%= link_to "register", register_path %> or <%= link_to "log in", login_path %> (as user) to checkout.</h4>
+ </div>
+<% end %>

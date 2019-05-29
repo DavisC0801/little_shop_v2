@@ -61,8 +61,12 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+<<<<<<< HEAD
+  config.include FactoryBot::Syntax::Methods
+=======
 
   config.include ActionView::Helpers::NumberHelper
+>>>>>>> 511be486a2f35edde651a338a7e950a81acfe6bf
 end
 
 Shoulda::Matchers.configure do |config|
