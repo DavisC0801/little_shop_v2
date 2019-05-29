@@ -40,18 +40,43 @@ describe Order, type: :model do
       @order_item_5 = OrderItem.create!(item: @item_4, order: @order_4, quantity: 1, price: @item_4.price)
       @order_item_6 = OrderItem.create!(item: @item_3, order: @order_5, quantity: 1, price: @item_3.price)
       @order_item_7 = OrderItem.create!(item: @item_4, order: @order_6, quantity: 2, price: @item_4.price)
-      @order_item_8 = OrderItem.create!(item: @item_5, order: @order_3, quantity: 1, price: @item_5.price)
+      @order_item_8 = OrderItem.create!(item: @item_5, order: @order_3, quantity: 1, price: @item_5.price, fulfilled: true)
     end
-    it ".total_cost" do
+
+    it "#total_cost" do
       expect(@order_1.total_cost).to eq(33.33)
       expect(@order_3.total_cost).to eq(77.77)
       expect(@order_6.total_cost).to eq(44.44)
     end
 
-    it ".total_quantity" do
+    it "#total_quantity" do
       expect(@order_1.total_quantity).to eq(2)
       expect(@order_3.total_quantity).to eq(2)
       expect(@order_6.total_quantity).to eq(2)
+    end
+
+    it "#restock_items" do
+      expect(@order_item_8.fulfilled).to eq(true)
+
+      @order_3.restock_items
+
+      expect(@order_item_8.reload.fulfilled).to eq(false)
+    end
+
+    it "#cancel_order" do
+      expect(@order_1.status).to eq("pending")
+
+      @order_1.cancel_order
+
+      expect(@order_1.reload.status).to eq("cancelled")
+    end
+
+    it "#update_order_item_fulfilled_status" do
+      expect(@order_item_8.fulfilled).to eq(true)
+
+      @order_3.mark_unfulfilled(@order_item_8)
+
+      expect(@order_item_8.reload.fulfilled).to eq(false)
     end
   end
 
