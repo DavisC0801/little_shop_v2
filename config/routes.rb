@@ -23,8 +23,8 @@ Rails.application.routes.draw do
 
   scope :dashboard, as: :dashboard, module: :merchants do
     resources :items, only: [:index, :new, :edit, :show, :destroy]
-    post "/items/deactivate", to: "/merchant/items#deactivate"
-    post "/items/activate", to: "/merchant/items#activate"
+    post "/items/deactivate", to: "/merchants/items#deactivate"
+    post "/items/activate", to: "/merchants/items#activate"
     resources :orders, only: :show
   end
 
