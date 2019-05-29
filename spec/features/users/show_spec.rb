@@ -7,7 +7,7 @@ RSpec.describe "As a registered user" do
       role: 0, active: true, name: "Chris", address: "123 Fake St", \
       city: "Denver", state: "Colorado", zip: 12345)
 
-      allow_any_instance_of(UsersController).to receive(:current_user).and_return(@user)
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
     end
 
     it "loads a page" do
@@ -33,15 +33,29 @@ RSpec.describe "As a registered user" do
     it "shows a link to edit profile data" do
       visit profile_path
 
-      within("#user-#{@user.id}-info") do
-        expect(page).to have_link("Edit your information")
+      expect(page).to have_link("Edit Profile")
+    end
+
+    describe "when I have orders placed in the system" do
+      it "I see a link on my profile page called 'My Orders'" do
+        visit profile_path
+
+        expect(page).to have_link("My Orders")
+      end
+
+      it "When I click 'My Orders' link, I am taken to /profile/orders/" do
+        visit profile_path
+
+        click_link("My Orders")
+
+        expect(current_path).to eq(profile_orders_path)
       end
     end
   end
 end
 
 RSpec.describe "As an unregistered user" do
-  it "shows a 404 page if invalid user_id is entered" do  
+  it "shows a 404 page if invalid user_id is entered" do
     visit profile_path
 
     expect(current_path).to eq(profile_path)

@@ -1,0 +1,9 @@
+<ul>
+<% @users.each do |user| %>
+  <div id="users-<%= user.id %>-info">
+    <li>Name: <%= link_to user.name, admin_user_path(user) %></li>
+    <li>Member since: <%= Date.strptime(user.created_at.to_s) %></li>
+    <li><%= button_to "Upgrade to Merchant" %></li>
+  </div>
+<% end %>
+</ul>

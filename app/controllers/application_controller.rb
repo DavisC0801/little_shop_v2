@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   helper_method :current_user,
+                :current_user?,
                 :current_merchant?,
                 :current_admin?,
                 :cart
@@ -16,7 +17,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user?
-    current_user&.user?
+    current_user && current_user.user?
   end
 
   def current_merchant?

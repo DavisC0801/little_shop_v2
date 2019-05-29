@@ -18,4 +18,16 @@ class Item < ApplicationRecord
   def activate
     update_attribute(:active, true)
   end
+
+  def ordered?
+    orders != []
+  end
+  
+  def subtotal(order)
+    price * order_quantity(order)
+  end
+
+  def order_quantity(order)
+    OrderItem.find_by(order_id: order.id, item_id: self.id).quantity
+  end
 end

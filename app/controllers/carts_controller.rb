@@ -1,9 +1,7 @@
-
 class CartsController < ApplicationController
   include ActionView::Helpers::TextHelper
 
   def show
-
   end
 
   def create

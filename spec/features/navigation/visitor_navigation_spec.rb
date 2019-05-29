@@ -9,9 +9,10 @@ RSpec.describe 'As a visitor,', type: :feature do
         expect(page).to have_link("Home", href: root_path)
         expect(page).to have_link("Items For Sale", href: items_path)
         expect(page).to have_link("Merchants", href: merchants_path)
-        expect(page).to have_link("My Shopping Cart", href: cart_path)
+        expect(page).to have_link("My Shopping Cart", href: carts_path)
         expect(page).to have_link("Log In", href: login_path)
         expect(page).to have_link("Register", href: register_path)
+        expect(page).to_not have_link("Users", href: admin_users_path)
       end
     end
 

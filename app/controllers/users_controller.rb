@@ -1,11 +1,12 @@
 class UsersController < ApplicationController
   def new
     @user = User.new
+    render file: "/public/404", status: 404 unless @user
   end
 
   def show
     @user = current_user
-    render file: "/public/404", status: 404 unless @user
+    render file: "/public/404", status: 404 unless current_user?
   end
 
   def create
@@ -22,18 +23,26 @@ class UsersController < ApplicationController
 
   def edit
     @user = current_user
+    render file: "/public/404", status: 404 unless @user
   end
 
   def update
-    user = User.find(current_user.id)
-    current_user.update(user_params)
-    flash[:message] = "Your profile has been updated."
-    redirect_to profile_path
+    if current_user.update(user_params)
+      flash[:message] = "Your profile has been updated."
+      redirect_to profile_path
+    else
+      flash[:message] = current_user.errors.full_messages.first
+      redirect_back(fallback_location: profile_edit_path)
+    end
   end
 
   private
 
   def user_params
-    params.require(:user).permit(:name, :address, :city, :state, :zip, :email, :password, :password_confirmation)
+    if params[:user][:password] == "" || params[:user][:password] == nil
+      params.require(:user).permit(:name, :address, :city, :state, :zip, :email)
+    else
+      params.require(:user).permit(:name, :address, :city, :state, :zip, :email, :password, :password_confirmation)
+    end
   end
 end
