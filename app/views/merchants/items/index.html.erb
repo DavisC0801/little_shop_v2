@@ -10,9 +10,9 @@
     <% else %>
       <li><%= button_to "Enable Item", dashboard_items_activate_path(item_id: item.id) %></li>
     <% end %>
-    <li><%= button_to "Edit Item", { action: "edit", id: item.id } %></li>
+    <li><%= button_to "Edit Item", edit_dashboard_item_path(id: item.id), method: :get %></li>
     <% if !item.ordered? %>
-      <li><%= button_to "Delete Item", { action: "destroy", id: item.id } %></li>
+      <li><%= button_to "Delete Item", { id: item.id, action: "destroy" }, method: :delete %></li>
     <% end %>
   </ul>
 <% end %>
