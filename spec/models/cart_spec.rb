@@ -1,55 +1,68 @@
 require 'rails_helper'
 
 RSpec.describe Cart do
-  before(:each) do
-    @item_1 = create(:item)
-    @item_2 = create(:item)
+  subject { Cart.new({'1' => 2, '2' => 3}) }
+
+  describe "#total" do
+    it "calculates the total number of items it holds" do
+      expect(subject.total_count).to eq(5)
+    end
   end
 
-  it '.add_item' do
-    cart = Cart.new({
-      "#{@item_1.id}" => 2,
-      "#{@item_2.id}" => 3
-      })
-    cart.add_item(@item_1.id)
-    cart.add_item(@item_2.id)
-    expect(cart.contents).to eq({
-      "#{@item_1.id}" => 3,
-      "#{@item_2.id}" => 4
-      })
+  describe "#add_item" do
+    it "adds a item to its contents" do
+      subject.add_item(1)
+      subject.add_item(2)
+
+      expect(subject.contents).to eq({'1' => 3, '2' => 4})
+    end
+
+    it "adds a item that hasn't been added yet" do
+      subject.add_item('3')
+
+      expect(subject.contents).to eq({'1' => 2, '2' => 3, '3' => 1})
+    end
   end
 
-  it '.cart_count' do
-    cart = Cart.new({
-      "#{@item_1.id}" => 2,
-      "#{@item_2.id}" => 3
-      })
-    expect(cart.cart_count).to eq(5)
+  describe "#subtotal" do
+    it "calculates the subtotal for item" do
+      item_1 = create(:item)
+      item_2 = create(:item)
+      cart_1 = Cart.new({item_1.id.to_s => 2, item_2.id.to_s => 3})
+
+      expect(cart_1.subtotal(item_1)).to eq(2 * item_1.price)
+      expect(cart_1.subtotal(item_2)).to eq(3 * item_2.price)
+    end
   end
 
-  it '.item_quantity_hash' do
-    cart = Cart.new({
-      "#{@item_1.id}" => 2,
-      "#{@item_2.id}" => 3
-      })
+  describe "#total" do
+    it "calculates the total cost" do
+      item_1 = create(:item)
+      item_2 = create(:item)
+      cart_1 = Cart.new({item_1.id.to_s => 2, item_2.id.to_s => 3})
 
-    expect(cart.item_quantity_hash.keys[0]).to eq(@item_1)
-    expect(cart.item_quantity_hash.values[0]).to eq(2)
-
-    expect(cart.item_quantity_hash.keys[1]).to eq(@item_2)
-    expect(cart.item_quantity_hash.values[1]).to eq(3)
+      expect(cart_1.total).to eq(2 * item_1.price + 3 * item_2.price)
+    end
   end
 
-  it 'contents_hash' do
-    cart = Cart.new({
-      "#{@item_1.id}" => 2,
-      "#{@item_2.id}" => 3
-      })
 
-    expect(cart.item_quantity_hash.keys[0]).to eq(@item_1)
-    expect(cart.item_quantity_hash.values[0]).to eq(2)
+  describe "#remove" do
+    it "remove a single item from cart" do
+      subject.remove_item(1)
+      subject.remove_item(2)
 
-    expect(cart.item_quantity_hash.keys[1]).to eq(@item_2)
-    expect(cart.item_quantity_hash.values[1]).to eq(3)
+      expect(subject.contents).to eq({'1' => 1, '2' => 2})
+      subject.remove_item(1)
+      expect(subject.contents).to eq({'2' => 2})
+    end
   end
+
+  describe "#remove_all" do
+    it "removes the item from cart" do
+      subject.remove_all_item(1)
+
+      expect(subject.contents).to eq({'2' => 3})
+    end
+  end
+
 end
