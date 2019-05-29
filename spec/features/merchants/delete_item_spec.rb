@@ -30,16 +30,14 @@ RSpec.describe "As a merchant" do
     it "deletes the item" do
       visit dashboard_items_path
 
-      within("#item-#{@item_2.id}-info") do
+      within("#item-#{@item_3.id}-info") do
         click_button("Delete Item")
       end
 
-      expect(page).to_not have_content("ID: #{@item_2.id}")
-      expect(page).to_not have_content("Name: #{@item_2.name}")
-      expect(page).to_not have_css("img[src='#{@item_2.image}']")
-      expect(page).to_not have_content("Price: $#{@item_2.price}")
-      expect(page).to_not have_content("Inventory: #{@item_2.inventory}")
-      expect(page).to_not have_button("Edit Item")
+      expect(page).to_not have_content("ID: #{@item_3.id}")
+      expect(page).to_not have_content("Name: #{@item_3.name}")
+      expect(page).to_not have_content("Price: $#{@item_3.price}")
+      expect(page).to_not have_content("Inventory: #{@item_3.inventory}")
     end
   end
 end
