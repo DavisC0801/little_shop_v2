@@ -43,12 +43,7 @@ class Order < ApplicationRecord
     .where('orders.status' => 0, 'items.user_id' => current_user.id)
   end
 
-  def self.ordering_order_status
-    order("CASE
-            WHEN status=0 THEN 1
-            WHEN status=1 THEN 2
-            WHEN status=2 THEN 3
-            WHEN status=3 THEN 4
-          END")
+  def self.sort_order_status
+    order(:status)
   end
 end

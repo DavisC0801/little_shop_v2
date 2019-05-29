@@ -92,8 +92,8 @@ describe Order, type: :model do
       @item_2 = @merchant_1.items.create!(name: "Item 2", active: true, price: 22.22, description: "description 2", image: "https://bit.ly/2LXAlJy", inventory: 2)
       @item_3 = @merchant_1.items.create!(name: "Item 3", active: true, price: 33.33, description: "description 3", image: "https://bit.ly/2LXAlJy", inventory: 3)
       @item_4 = @merchant_1.items.create!(name: "Item 4", active: true, price: 44.44, description: "description 4", image: "https://bit.ly/2LXAlJy", inventory: 4)
-      @item_5 = @merchant_2.items.create!(name: "Item 5", active: true, price: 55.55, description: "description 5", image: "https://bit.ly/2LXAlJy", inventory: 5)
-      @item_6 = @merchant_2.items.create!(name: "Item 6", active: true, price: 66.66, description: "description 6", image: "https://bit.ly/2LXAlJy", inventory: 6)
+      @item_5 = @merchant_1.items.create!(name: "Item 5", active: true, price: 55.55, description: "description 5", image: "https://bit.ly/2LXAlJy", inventory: 5)
+      @item_6 = @merchant_1.items.create!(name: "Item 6", active: true, price: 66.66, description: "description 6", image: "https://bit.ly/2LXAlJy", inventory: 6)
 
       @order_1 = Order.create!(user: @user_1 , status: 0)
       @order_2 = Order.create!(user: @user_1 , status: 2)
@@ -111,10 +111,17 @@ describe Order, type: :model do
       @order_item_7 = OrderItem.create!(item: @item_4, order: @order_6, quantity: 2, price: @item_4.price)
       @order_item_8 = OrderItem.create!(item: @item_5, order: @order_3, quantity: 1, price: @item_5.price)
     end
+
     it ".pending_orders" do
       @orders = Order.all
 
       expect(@orders.pending_orders(@merchant_1)).to eq([@order_1, @order_3, @order_6])
+    end
+
+    it ".sort_order_status" do
+      @orders = Order.all
+
+      expect(@orders.sort_order_status).to eq([@order_1, @order_3, @order_6, @order_4, @order_2, @order_5])
     end
   end
 end
