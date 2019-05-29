@@ -8,10 +8,10 @@ class OrdersController < ApplicationController
   end
 
   def cancel
-    @order = Order.find(params[:id])
-    @order.restock_items
-    @order.cancel_order
-    redirect_to profile_order_path(@order)
-    flash[:message] = "Order #{@order.id} has been cancelled"
+    order = Order.find(params[:id])
+    order.restock_items
+    order.cancel_order
+    redirect_to profile_order_path(order)
+    flash[:message] = "Order #{order.id} has been cancelled"
   end
 end

@@ -1,6 +1,58 @@
 Roles: 0 - User
 1 - Admin
 2 - Merchant
-1 - Admin
-2 - Merchant
-3 - Registered User
+
+Status - 0 -pending
+1 - packaged 
+2 - shipped
+3 - cancelled
+Rails.application.routes.draw do
+  root 'welcome#index'
+
+  get '/login', to: 'sessions#new', as: :login
+
+  get '/logout', to: 'sessions#destroy', as: :logout
+
+  get '/register', to: 'users#new', as: :register
+
+  get '/profile', to: 'users#show', as: :profile
+
+  get '/profile/edit', to: 'users#edit', as: :profile_edit
+
+  scope :profile, as: :profile, module: :profile do
+    resources :orders, only: [:index, :show]
+  end
+
+  get '/cart', to: 'carts#show', as: :cart
+
+  resources :items, only: [:index, :show]
+
+
+  scope :dashboard, as: :dashboard, module: :merchant do
+    root 'merchants#dashboard'
+    resources :items, only: [:index, :new, :edit, :show]
+    resources :orders, only: [:show]
+  end
+
+  resources :merchants, only: [:index, :show]
+
+  namespace :admin do
+    get '/dashboard', to: 'users#dashboard'
+    resources :users, only: :show do
+      resources :orders, only: [:index, :show]
+    end
+    resources :users, only: [:index, :edit, :show]
+    resources :merchants, only: :show do
+      resources :orders, only: :show, scope: :merchant_show
+      resources :items, only: [:index, :new, :edit]
+    end
+  end
+
+  # scope :admin, module: :admin, as: :admin do
+  #   resources :categories, only: :index
+  # end
+
+  patch '/profile/edit', to: 'users#update'
+
+  resources :users, only: [:create]
+end

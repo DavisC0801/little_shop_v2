@@ -36,23 +36,23 @@ RSpec.describe "As a registered user," do
       expect(page).to have_content("You're now logged off!")
     end
 
-    xit "and any items in shopping cart are deleted" do
-      visit items_path
-
-      within("#item-#{@item_1.id}") do
-        click_button "Add Item"
-      end
-
-      within("#item-#{@item_2.id}") do
-        click_button "Add Item"
-      end
-
-      expect(page).to have_content('Cart: 2')
-
-      click_link "Log Out"
-
-      expect(page).to have_content('Cart: 0')
-    end
+    # xit "and any items in shopping cart are deleted" do
+    #   visit items_path
+    #
+    #   within("#item-#{@item_1.id}") do
+    #     click_button "Add Item"
+    #   end
+    #
+    #   within("#item-#{@item_2.id}") do
+    #     click_button "Add Item"
+    #   end
+    #
+    #   expect(page).to have_content('Cart: 2')
+    #
+    #   click_link "Log Out"
+    #
+    #   expect(page).to have_content('Cart: 0')
+    # end
   end
 
   describe "merchant can click 'Log Out'" do

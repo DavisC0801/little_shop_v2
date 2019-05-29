@@ -13,13 +13,25 @@ Rails.application.routes.draw do
   get '/profile/edit', to: 'users#edit', as: :profile_edit
   patch '/profile/edit', to: 'users#update'
 
-  scope :profile, as: :profile do
-    resources :orders, only: [:index, :show]
-  end
-
   patch '/profile/orders/:id/', to: "orders#cancel"
 
   get '/dashboard', to: 'merchants#show'
+
+  get '/carts', to: 'carts#show', as: 'cart'
+  put '/carts', to: 'carts#update'
+  delete '/carts', to: 'carts#destroy'
+
+  resources :merchants, only: [:index]
+
+  resources :users, only: [:create]
+
+  resources :carts, only: [:create]
+
+  resources :items, only: [:index, :show, :create, :update]
+
+  scope :profile, as: :profile do
+    resources :orders, only: [:index, :show]
+  end
 
   scope :dashboard, as: :dashboard, module: :merchants do
     resources :items, only: [:index, :new, :edit, :show, :destroy]
@@ -28,20 +40,8 @@ Rails.application.routes.draw do
     resources :orders, only: :show
   end
 
-  resources :items, only: [:index, :show, :create, :update]
-
-  resources :merchants, only: [:index]
-
-  resources :users, only: [:create]
-
-  resources :carts, only: [:create]
-
   namespace :admin do
     get '/dashboard', to: 'dashboard#index'
     resources :users, only: [:index, :show]
   end
-
-  get '/carts', to: 'carts#show', as: 'cart'
-  put '/carts', to: 'carts#update'
-  delete '/carts', to: 'carts#destroy'
 end

@@ -1,9 +1,9 @@
 <%= form_tag login_path do %>
   <%= label_tag :email %> <br></br>
-  <%= text_field_tag :email, required: true, :pattern => '[^@]+@[^@]+\.[a-zA-Z]{2,6}' %>
+  <%= text_field_tag :email %>
 
   <%= label_tag :password %>
-  <%= text_field_tag :password, required: true %> <br></br>
+  <%= text_field_tag :password %> <br></br>
 
   <%= submit_tag "Log In" %>
 <% end %>
