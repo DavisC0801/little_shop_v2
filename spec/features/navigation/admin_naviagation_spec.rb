@@ -16,7 +16,8 @@ RSpec.describe 'As a admin,', type: :feature do
         expect(page).to have_link("Items For Sale", href: items_path)
         expect(page).to have_link("Merchants", href: merchants_path)
         expect(page).to have_link("Dashboard", href: admin_dashboard_path)
-        expect(page).to have_link("Log Out", href: logout_path)
+        expect(page).to have_link("Dashboard", href: admin_dashboard_path)
+        expect(page).to have_link("Users", href: admin_users_path)
         expect(page).to_not have_link("Profile", href: profile_path)
         expect(page).to_not have_link("My Shopping Cart", href: cart_path)
         expect(page).to_not have_link("Log In", href: login_path)
@@ -24,12 +25,19 @@ RSpec.describe 'As a admin,', type: :feature do
       end
     end
 
-    describe "I see 1 new link in the navigation bar" do
-      it "when I click on a link, I go to correct page" do
+    describe "I see admin links in the navigation bar" do
+      it "when I click on dashboard link, I go to correct page" do
         visit items_path
 
         click_link "Dashboard"
         expect(current_path).to eq(admin_dashboard_path)
+      end
+
+      it "when I click on Users link, I go to correct page" do
+        visit items_path
+
+        click_link "Users"
+        expect(current_path).to eq(admin_users_path)
       end
     end
 

@@ -19,6 +19,7 @@ RSpec.describe 'As a merchant,', type: :feature do
         expect(page).to have_link("Log Out", href: logout_path)
         expect(page).to_not have_link("Profile", href: profile_path)
         expect(page).to_not have_link("My Shopping Cart", href: cart_path)
+        expect(page).to_not have_link("Users", href: admin_users_path)
         expect(page).to_not have_link("Log In", href: login_path)
         expect(page).to_not have_link("Register", href: register_path)
       end
