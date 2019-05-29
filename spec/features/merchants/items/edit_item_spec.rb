@@ -30,14 +30,16 @@ RSpec.describe "As a merchant" do
       end
 
       fill_in "Name", with: "Item 11"
-      fill_in "Price", with: "111.111"
+      fill_in "Price", with: "111.11"
       fill_in "Description", with: "description 11"
       fill_in "Inventory", with: "11"
 
       click_button "Update Item"
 
+      @item_1.reload
+
       expect(@item_1.name).to eq("Item 11")
-      expect(@item_1.price).to eq(111.111)
+      expect(@item_1.price).to eq(111.11)
       expect(@item_1.description).to eq("description 11")
       expect(@item_1.image).to eq("https://img.etimg.com/thumb/msid-64749432,width-643,imgsize-242955,resizemode-4/art-stealing-thief-thinkstockphotos-459021285.jpg")
       expect(@item_1.inventory).to eq(11)
@@ -61,9 +63,10 @@ RSpec.describe "As a merchant" do
       it "provides an error if I do not fill in name" do
         visit edit_dashboard_item_path(@item_1)
 
-        fill_in "Price", with: "11.11"
-        fill_in "Description", with: "description 1"
-        fill_in "Inventory", with: "1"
+        fill_in "Name", with: ""
+        fill_in "Price", with: "111.11"
+        fill_in "Description", with: "description 11"
+        fill_in "Inventory", with: "11"
 
         click_button "Update Item"
 
@@ -74,9 +77,10 @@ RSpec.describe "As a merchant" do
       it "provides an error if I do not fill in price" do
         visit edit_dashboard_item_path(@item_1)
 
-        fill_in "Name", with: "Item 1"
-        fill_in "Description", with: "description 1"
-        fill_in "Inventory", with: "1"
+        fill_in "Name", with: "Item 11"
+        fill_in "Price", with: ""
+        fill_in "Description", with: "description 11"
+        fill_in "Inventory", with: "11"
 
         click_button "Update Item"
 
@@ -87,9 +91,10 @@ RSpec.describe "As a merchant" do
       it "provides an error if I do not fill in description" do
         visit edit_dashboard_item_path(@item_1)
 
-        fill_in "Name", with: "Item 1"
-        fill_in "Price", with: "11.11"
-        fill_in "Inventory", with: "1"
+        fill_in "Name", with: "Item 11"
+        fill_in "Price", with: "111.11"
+        fill_in "Description", with: ""
+        fill_in "Inventory", with: "11"
 
         click_button "Update Item"
 
@@ -100,9 +105,10 @@ RSpec.describe "As a merchant" do
       it "provides an error if I do not fill in inventory" do
         visit edit_dashboard_item_path(@item_1)
 
-        fill_in "Name", with: "Item 1"
-        fill_in "Price", with: "11.11"
-        fill_in "Description", with: "description 1"
+        fill_in "Name", with: "Item 11"
+        fill_in "Price", with: "111.11"
+        fill_in "Description", with: "description 11"
+        fill_in "Inventory", with: ""
 
         click_button "Update Item"
 
