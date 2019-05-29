@@ -52,11 +52,9 @@ RSpec.describe 'As a admin,', type: :feature do
     it "orders are sorted by 'status'" do
       visit admin_dashboard_path
 
-      expect(@order_1.id).to appear_before(@order_4.id)
-      expect(@order_3.id).to appear_before(@order_4.id)
-      expect(@order_4.id).to appear_before(@order_2.id)
-      expect(@order_4.id).to appear_before(@order_5.id)
-      expect(@order_5.id).to appear_before(@order_6.id)
+      expect("Order ID: #{@order_1.id}").to appear_before("Order ID: #{@order_4.id}")
+      expect("Order ID: #{@order_4.id}").to appear_before("Order ID: #{@order_2.id}")
+      expect("Order ID: #{@order_5.id}").to appear_before("Order ID: #{@order_6.id}")
     end
 
     describe "For each order I see the following information:" do
@@ -65,14 +63,14 @@ RSpec.describe 'As a admin,', type: :feature do
 
         within("#orders-#{@order_1.id}-info") do
           expect(page).to have_content("Order ID: #{@order_1.id}")
-          expect(page).to have_content("Order ID: #{@order_1.user}")
-          expect(page).to have_content("Order ID: #{@order_1.created_at}")
+          expect(page).to have_content("By: #{@order_1.user.name}")
+          expect(page).to have_content(@order_1.created_at.strftime("%-m/%-d/%y at %H:%M"))
         end
 
         within("#orders-#{@order_4.id}-info") do
           expect(page).to have_content("Order ID: #{@order_4.id}")
-          expect(page).to have_content("Order ID: #{@order_4.user}")
-          expect(page).to have_content("Order ID: #{@order_4.created_at}")
+          expect(page).to have_content("By: #{@order_4.user.name}")
+          expect(page).to have_content(@order_4.created_at.strftime("%-m/%-d/%y at %H:%M"))
         end
       end
 
@@ -80,8 +78,8 @@ RSpec.describe 'As a admin,', type: :feature do
         visit admin_dashboard_path
 
         within("#orders-#{@order_1.id}-info") do
-          expect(page).to have_content("Order ID: #{@order_1.user}")
-          expect(page).to have_link("#{@order_1.user}", href: admin_user_path(@user_1))
+          expect(page).to have_content("By: #{@order_1.user.name}")
+          expect(page).to have_link("#{@order_1.user.name}", href: admin_user_path(@user_1))
         end
       end
     end
