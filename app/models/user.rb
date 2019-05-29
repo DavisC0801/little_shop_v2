@@ -15,6 +15,10 @@ class User < ApplicationRecord
     self.where(role: :merchant)
   end
 
+  def self.find_users
+    self.where(role: :user)
+  end
+
   def top_items(limit)
     items.joins(:orders)
           .where("orders.status = 2")
