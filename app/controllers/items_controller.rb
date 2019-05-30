@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
 
   def index
-    @items = Item.all
+    @items = Item.all_active
     @cart = Cart.new(session[:cart])
   end
 
