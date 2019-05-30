@@ -43,19 +43,18 @@ RSpec.describe Cart do
 
   describe "#remove" do
     it "remove an item from cart" do
-      subject.remove_item(1)
-      subject.remove_item(2)
+      subject.remove(1)
+      subject.remove(2)
       expect(subject.contents).to eq({'1' => 1, '2' => 2})
-      subject.remove_item(1)
+      subject.remove(1)
       expect(subject.contents).to eq({'2' => 2})
     end
   end
 
   describe "#remove_all" do
     it "removes the item from cart" do
-      subject.remove_all_item(1)
+      subject.clear_item(1)
       expect(subject.contents).to eq({'2' => 3})
     end
   end
-
 end

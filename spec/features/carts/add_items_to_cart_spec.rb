@@ -32,7 +32,7 @@ RSpec.describe "adding items to their cart" do
       visit item_path(@item_1)
       click_button "Add Item"
 
-      expect(page).to have_content("You now have 1 #{@item_1.name} in your cart.")
+      expect(page).to have_content("You now have 1 item of #{@item_1.name} in your cart.")
       expect(current_path).to eq(items_path)
     end
 
@@ -41,12 +41,12 @@ RSpec.describe "adding items to their cart" do
       click_button "Add Item"
 
       visit item_path(@item_2)
-      click_button "Add to Car"
+      click_button "Add Item"
 
       visit item_path(@item_1)
       click_button "Add Item"
 
-      expect(page).to have_content("You now have 2 #{@item_1.name}s in your cart.")
+      expect(page).to have_content("You now have 2 items of #{@item_1.name}s in your cart.")
     end
 
     it "total of items in the cart" do
@@ -102,7 +102,7 @@ RSpec.describe "adding items to their cart" do
 
     it "displays the total number of items in the cart" do
       visit item_path(@item_1)
-
+    
       expect(page).to have_content("Cart: 0")
 
       click_button "Add Item"
