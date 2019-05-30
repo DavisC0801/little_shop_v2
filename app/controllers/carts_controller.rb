@@ -2,6 +2,7 @@ class CartsController < ApplicationController
   include ActionView::Helpers::TextHelper
 
   def show
+   render file: "/public/404", status: 404 unless current_user?
   end
 
   def create
