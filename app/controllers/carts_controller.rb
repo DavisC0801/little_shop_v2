@@ -14,7 +14,7 @@ class CartsController < ApplicationController
     flash[:notice] = "You now have #{pluralize(quantity, "item")} of #{item.name} in your cart."
     redirect_to items_path
   end
-  
+
   # def decrease
   #   item = Item.find(params[:id])
   #   cart.remove(item.id)
@@ -26,7 +26,7 @@ class CartsController < ApplicationController
   # def remove
   #   item = Item.find(params[:item_id])
   #   cart.remove_all(item.id)
-  #   flash[:notice] = "You now removed all #{item.name} in your cart."
+  #   flash[:notice] = "You removed#{item.name}"
   #   session[:cart] = cart.contents
   #   redirect_to cart_path
   # end
