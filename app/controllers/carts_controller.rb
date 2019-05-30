@@ -11,7 +11,7 @@ class CartsController < ApplicationController
     session[:cart][:item_id.to_s] ||= 0
     session[:cart][:item_id.to_s] = session[:cart][:item_id.to_s] + 1
     quantity = session[:cart][:item_id.to_s]
-    flash[:notice] = "You now have #{pluralize(quantity, "item")} of #{item.name} in your cart."
+    flash[:notice] = "You have #{pluralize(quantity, 'item')} in your cart."
     redirect_to items_path
   end
 
