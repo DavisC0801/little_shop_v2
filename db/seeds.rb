@@ -23,7 +23,7 @@ end
 User.all.each do |user|
   number_of_items = rand(1..8)
   number_of_items.times do
-    name = Faker::Hipster.unique.words(1)
+    name = Faker::Hipster.unique.word.upcase
     description = Faker::Hipster.paragraph
     image = Faker::Avatar.image
     price = Faker::Commerce.price(range = 1.00..100.00, as_string = true)
