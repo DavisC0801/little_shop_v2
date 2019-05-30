@@ -3,9 +3,7 @@ require "rails_helper"
 RSpec.describe "As a registered user" do
   describe "when I visit my own profile page" do
     before do
-      @user = User.create!(email: "notmi_reelemail@nope.com", password: "test", \
-      role: 0, active: true, name: "Chris", address: "123 Fake St", \
-      city: "Denver", state: "Colorado", zip: 12345)
+      @user = User.create!(email: "notmi_reelemail@nope.com", password: "test", role: 0, active: true, name: "Chris", address: "123 Fake St", city: "Denver", state: "Colorado", zip: 12345)
 
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
     end
