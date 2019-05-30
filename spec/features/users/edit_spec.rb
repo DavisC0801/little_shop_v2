@@ -1,28 +1,11 @@
-# As a registered user
-# When I visit my profile page
-# I see a link to edit my profile data
-# When I click on the link to edit my profile data
-# Then my current URI route is "/profile/edit"
-# I see a form like the registration page
-# The form contains all of my user information
-# The password fields are blank and can be left blank
-# I can change any or all of the information
-# When I submit the form
-# Then I am returned to my profile page
-# And I see a flash message telling me that my data is updated
-# And I see my updated information
-
 require "rails_helper"
 
 RSpec.describe "As a registered user" do
   describe "when I visit my own profile page" do
     before do
-      @user = User.create!(email: "notmi_reelemail@nope.com", password: "test", \
-      role: 0, active: true, name: "Chris", address: "123 Fake St", \
-      city: "Denver", state: "Colorado", zip: 12345)
-      @gracie = User.create!(email: "laura_grace_davis@gmail.com", password: "1283florida_miners;", \
-      role: 0, active: true, name: "Laura", address: "99836 Wilchester Dr.", \
-      city: "Houston", state: "Texas", zip: 77079)
+      @user = User.create!(email: "notmi_reelemail@nope.com", password: "test", role: 0, active: true, name: "Chris", address: "123 Fake St", city: "Denver", state: "Colorado", zip: 12345)
+      @gracie = User.create!(email: "laura_grace_davis@gmail.com", password: "1283florida_miners;", role: 0, active: true, name: "Laura", address: "99836 Wilchester Dr.", city: "Houston", state: "Texas", zip: 77079)
+
       allow_any_instance_of(UsersController).to receive(:current_user).and_return(@user)
     end
 

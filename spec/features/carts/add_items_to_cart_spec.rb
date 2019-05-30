@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require 'rails_helper'
 
 RSpec.describe 'as a visitor' do
@@ -17,37 +15,37 @@ RSpec.describe 'as a visitor' do
     expect(current_path).to eq(items_path)
   end
 
-  it 'the message for multiple items' do
+  it "the message for multiple items" do
     visit item_path(@item_1)
-    click_button 'Add Item'
+    click_button "Add Item"
 
     visit item_path(@item_2)
-    click_button 'Add Item'
+    click_button "Add Item"
 
     visit item_path(@item_1)
-    click_button 'Add Item'
+    click_button "Add Item"
 
     expect(page).to have_content("You now have 2 items of #{@item_1.name} in your cart.")
   end
 
-  it 'total of items in the cart' do
+  it "total of items in the cart" do
     visit item_path(@item_1)
 
-    expect(page).to have_content('Cart: 0')
+    expect(page).to have_content("Cart: 0")
 
-    click_button 'Add Item'
+    click_button "Add Item"
 
-    expect(page).to have_content('Cart: 1')
+    expect(page).to have_content("Cart: 1")
 
     visit item_path(@item_2)
-    click_button 'Add Item'
+    click_button "Add Item"
 
-    expect(page).to have_content('Cart: 2')
+    expect(page).to have_content("Cart: 2")
 
     visit item_path(@item_1)
-    click_button 'Add Item'
+    click_button "Add Item"
 
-    expect(page).to have_content('Cart: 3')
+    expect(page).to have_content("Cart: 3")
   end
 
   context 'as a user' do

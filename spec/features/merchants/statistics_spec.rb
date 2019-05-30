@@ -47,31 +47,5 @@ RSpec.describe "As a merchant" do
       expect(page.all(".quantity_list")[3]).to have_content("#{@item_8.name}: #{@order_item_10.quantity}")
       expect(page.all(".quantity_list")[4]).to have_content("#{@item_3.name}: #{@order_item_3.quantity}")
     end
-
-    # it "shows the total quantity of items I've sold, and as a percentage against my sold units plus remaining inventory" do
-      # visit dashboard_path
-
-      # expect(page).to have_content("You have sold 12 items, which is 26.7% of your total inventory.")
-    # end
-    #
-    # it "top 3 states where my items were shipped, and their quantities" do
-    #   visit dashboard_path
-    #
-    # end
-    #
-    # it "shows the top three city/states where my items were shipped, and thier quantities" do
-    #   visit dashboard_path
-    #
-    # end
-    #
-    # it "shows the name of the user with the most orders from me (pick one if there's a tie), and number of orders" do
-    #   visit dashboard_path
-    #
-    # end
-    #
-    # it "shows the top 3 users who have spent the most money on my items, and the total amount they've spent" do
-    #   visit dashboard_path
-    #
-    # end
   end
 end
