@@ -3,13 +3,7 @@ require 'rails_helper'
 RSpec.describe "as a registered user", type: :feature do
   describe "when I visit my orders page" do
     before :each do
-      @user = User.create!(email: "notmi_reelemail@nope.com",
-                           password: "test",
-                           name: "Chris",
-                           address: "123 Fake St",
-                           city: "Denver",
-                           state: "Colorado",
-                           zip: 12345 )
+      @user = User.create!(email: "notmi_reelemail@nope.com",password: "test", name: "Chris", address: "123 Fake St", city: "Denver", state: "Colorado", zip: 12345 )
 
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
 

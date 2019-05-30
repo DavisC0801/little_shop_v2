@@ -71,9 +71,12 @@ describe User, type: :model do
     it "finds users" do
       expect(User.find_users).to eq([@user_1, @user_2])
     end
+<<<<<<< HEAD
 
     it "finds users" do
       expect(User.find_merchants).to eq([@merchant_1])
     end
+=======
+>>>>>>> 34cf9a2cbee469d9bb992916decca0cc46ac0afa
   end
 end
