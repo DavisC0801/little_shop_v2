@@ -68,47 +68,47 @@ RSpec.describe Cart, type: :model do
       cart = Cart.new({
         "#{@item_1.id}" => 2,
         "#{@item_2.id}" => 3
-      })
-      cart.add_item(@item_1.id)
-      cart.add_item(@item_2.id)
-      expect(cart.contents).to eq({
-        "#{@item_1.id}" => 3,
-        "#{@item_2.id}" => 4
-      })
-    end
+        })
+        cart.add_item(@item_1.id)
+        cart.add_item(@item_2.id)
+        expect(cart.contents).to eq({
+          "#{@item_1.id}" => 3,
+          "#{@item_2.id}" => 4
+          })
+        end
 
-    it '.total_count' do
-      cart = Cart.new({
-        "#{@item_1.id}" => 2,
-        "#{@item_2.id}" => 3
-      })
-      expect(cart.total_count).to eq(5)
-    end
+        it '.total_count' do
+          cart = Cart.new({
+            "#{@item_1.id}" => 2,
+            "#{@item_2.id}" => 3
+            })
+            expect(cart.total_count).to eq(5)
+          end
 
-    it '.item_and_quantity' do
-      cart = Cart.new({
-        "#{@item_1.id}" => 2,
-        "#{@item_2.id}" => 3
-      })
+          it '.item_and_quantity' do
+            cart = Cart.new({
+              "#{@item_1.id}" => 2,
+              "#{@item_2.id}" => 3
+              })
 
-      expect(cart.item_and_quantity.keys[0]).to eq(@item_1)
-      expect(cart.item_and_quantity.values[0]).to eq(2)
+              expect(cart.item_and_quantity.keys[0]).to eq(@item_1)
+              expect(cart.item_and_quantity.values[0]).to eq(2)
 
-      expect(cart.item_and_quantity.keys[1]).to eq(@item_2)
-      expect(cart.item_and_quantity.values[1]).to eq(3)
-    end
+              expect(cart.item_and_quantity.keys[1]).to eq(@item_2)
+              expect(cart.item_and_quantity.values[1]).to eq(3)
+            end
 
-    it 'contents_hash' do
-      cart = Cart.new({
-        "#{@item_1.id}" => 2,
-        "#{@item_2.id}" => 3
-      })
+            it 'contents_hash' do
+              cart = Cart.new({
+                "#{@item_1.id}" => 2,
+                "#{@item_2.id}" => 3
+                })
 
-      expect(cart.item_and_quantity.keys[0]).to eq(@item_1)
-      expect(cart.item_and_quantity.values[0]).to eq(2)
+                expect(cart.item_and_quantity.keys[0]).to eq(@item_1)
+                expect(cart.item_and_quantity.values[0]).to eq(2)
 
-      expect(cart.item_and_quantity.keys[1]).to eq(@item_2)
-      expect(cart.item_and_quantity.values[1]).to eq(3)
-    end
-  end
+                expect(cart.item_and_quantity.keys[1]).to eq(@item_2)
+                expect(cart.item_and_quantity.values[1]).to eq(3)
+              end
+            end
 end

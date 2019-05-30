@@ -60,8 +60,19 @@ describe User, type: :model do
       expect(@merchant_1.top_items(3).second.name).to eq(@item_7.name)
       expect(@merchant_1.top_items(3).third.name).to eq(@item_4.name)
     end
+  end
+  describe "class methods" do
+    before :each do
+      @user_1 = User.create!(email: "user1@gmail.com", password: "password1", role: 0, active: true, name: "User 1", address: "1 Fake St", city: "city 1", state: "state 1", zip: "12345")
+      @user_2 = User.create!(email: "user2@gmail.com", password: "password2", role: 0, active: true, name: "User 2", address: "2 Fake St", city: "city 2", state: "state 2", zip: "23456")
+      @merchant_1 = User.create!(email: "merchant1@gmail.com", password: "password1", role: 2, active: true, name: "Merchant 1", address: "1 Fake St", city: "city 1", state: "state 1", zip: "12345")
+    end
 
-    it "finds merchants" do
+    it "finds users" do
+      expect(User.find_users).to eq([@user_1, @user_2])
+    end
+
+    it "finds users" do
       expect(User.find_merchants).to eq([@merchant_1])
     end
   end

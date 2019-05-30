@@ -27,10 +27,13 @@ class UsersController < ApplicationController
   end
 
   def update
-    user = User.find(current_user.id)
-    current_user.update(user_params)
-    flash[:message] = 'Your profile has been updated.'
-    redirect_to profile_path
+    if current_user.update(user_params)
+     flash[:message] = "Your profile has been updated."
+     redirect_to profile_path
+   else
+     flash[:message] = current_user.errors.full_messages.first
+     redirect_back(fallback_location: profile_edit_path)
+   end
   end
 
   private
