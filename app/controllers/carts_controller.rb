@@ -2,7 +2,8 @@ class CartsController < ApplicationController
   include ActionView::Helpers::TextHelper
 
   def show
-   render file: "/public/404", status: 404 unless current_user?
+    render file: '/public/404', status: 404 if current_merchant?
+    render file: '/public/404', status: 404 if current_admin?
   end
 
   def create
@@ -11,7 +12,7 @@ class CartsController < ApplicationController
     session[:cart][params[:item_id].to_s] ||= 0
     session[:cart][params[:item_id].to_s] = session[:cart][params[:item_id].to_s] + 1
     quantity = session[:cart][params[:item_id].to_s]
-    flash[:notice] = "You now have #{pluralize(quantity, "item")} of #{item.name} in your cart."
+    flash[:notice] = "You now have #{pluralize(quantity, 'item')} of #{item.name} in your cart."
     redirect_to items_path
   end
 
@@ -26,7 +27,7 @@ class CartsController < ApplicationController
   # def remove
   #   item = Item.find(params[:item_id])
   #   cart.remove_all(item.id)
-  #   flash[:notice] = "You now removed all #{item.name} in your cart."
+  #   flash[:notice] = "You removed#{item.name}"
   #   session[:cart] = cart.contents
   #   redirect_to cart_path
   # end

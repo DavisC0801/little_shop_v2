@@ -1,60 +1,72 @@
-# Little Shop of Orders, v2
-BE Mod 2 Week 4/5 Group Project
 
-## Background and Description
+# Art Thieves
 
-"Little Shop of Orders" is a fictitious e-commerce platform where users can register to place items into a shopping cart and 'check out'. Merchant users can mark their items as 'fulfilled'; the last merchant to mark items in an order as 'fulfilled' will automatically set the order status to "shipped". Each user role will have access to some or all CRUD functionality for application models.
+'Art Thieves' is a fictitious e-commerce platform consisting of users, merchants, and admins. Site visitors can log in as a User, Merchant, or Admin. Users and visitors can add items to a cart. Users can 'checkout' their cart to create an order. Merchants can fulfill items in an order, and admins can access functionality of both users and merchants.
 
-Students will be put into 3 or 4 person groups to complete the project.
-
-## Learning Goals
-- Advanced Rails routing (nested resources and namespacing)
-- Advanced ActiveRecord for calculating statistics
-- Average HTML/CSS layout and design for UX/UI
-- Session management and use of POROs for shopping cart
-- Authentication, Authorization, separation of user roles and permissions
+A project that demonstrates CRUD and implements the MVC model.
 
 ## Requirements
 - must use Rails 5.1.x
 - must use PostgreSQL
-- must use 'bcrypt' for authentication
-- all controller and model code must be tested via feature tests and model tests, respectively
-- must use good GitHub branching, team code reviews via GitHub comments, and use of a project planning tool like waffle.io
-- must include a thorough README to describe their project
 
-## Permitted
-- use any gems we've used in class (pry, launchy, shoulda-matchers, etc)
-- use FactoryBot to speed up your test development
-- use "rails generators" to speed up your app development
+# To Begin
 
-## Not Permitted
-- do not use JavaScript for pagination or sorting controls
+Clone the repo on your local machine from your terminal
 
-## Permission
-- if there is a specific gem you'd like to use in the project, please get permission from your instructors first
+    git clone git@github.com:DavisC0801/little_shop_v2.git
 
-## Schema
+Enter the newly created directory and run bundle install and bundle update
 
-You should use this schema:
+    cd little_shop-v2
+    bundle install
+    bundle update
 
-![Imgur](https://i.imgur.com/kEcAZdw.png)
+Set up your environment
 
-## User Stories
+    rake db:{create, migrate, seed}
 
-Your team may not be able to work on these stories in numeric order. Work together to determine the best starting place and work from there.
+Initialize your server
 
-- [Little Shop v2 stories](stories.md)
+    rails s
+
+Navigate to 'localhost:3000' in your browser
+
+Once you reach the site you can access login, registration, and other visitor functionality via the navigation bar at the top of the screen.
+
+# Features
+
+FactoryBot was used to provide test data to RSpec
+
+Faker Gem was implemented to create a vast seed.rb file with minimal work
+
+New users can be created through the 'Register' link in the navigation bar.
+
+Merchant and Admin capabilities with login and checkout.
+
+# Database Visualization
+
+![Database Visualization](/database_schema.png?raw=true)
+
+# How to Test
+
+ RSpec was implemented for testing. To run the full test suite, type 'rspec' from the terminal.
+
+    rspec
+
+Individual tests can be run by specifying the desired file path and line number.
+
+    rspec spec/models/cart_spec.rb:34
 
 
-## Rubric, Evaluations, and final Assessment
+# Built With
 
-Each team will meet with an instructor at least two times before the project is due.
+- Ruby on Rails Framework
 
-- At first team progress check-in, about 33% of the work is expected to be completed satisfactorily
-- At second team progress check-in, about 66% of the work is expected to be completed satisfactorily
-- Final submission will expect 100% completion
-
-Each team will have a rubric uploaded to [https://github.com/turingschool/ruby-submissions](https://github.com/turingschool/ruby-submissions)
-
+# Authors
 
 View the [Little Shop Rubric](LittleShopRubric.pdf)
+- Chris Davis
+- Andrew Johnson
+- Martin Mercer
+- Logan Pile
+- Martha Troubh

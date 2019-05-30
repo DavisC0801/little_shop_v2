@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   private
 
   def cart
-    @cart || Cart.new(session[:cart])
+    @cart ||= Cart.new(session[:cart])
   end
 
   def current_user

@@ -1,15 +1,15 @@
-<% if !cart = 0 %>
+<% if !cart.nil? %>
  <% cart.item_and_quantity.each do |item, quantity| %>
    <div id="item-<%= item.id %>">
      <%= link_to item.name, item_path(item) %>
      <%= image_tag item.image || @default_image, alt: "image of #{item.name}" %>
      <p><%= item.user.name %></p>
      <p><%= number_to_currency(item.price) %></p>
-     <div class="quantities" >
-     Quantity:<%= button_to "-", cart_decrease(item), method: :patch%><%= quantity %>
-       <%= button_to "+", cart_path(item), method: :patch %>
-       <%= button_to "Remove", cart_remove_path(item), method: :patch%>
-     </div>
+     <!-- <div class="quantities" >
+      Quantity:<%# button_to "-", cart_decrease(item), method: :patch%><%= quantity %>
+       <%# button_to "+", cart_path(item), method: :patch %>
+       <%# button_to "Remove", cart_remove_path(item), method: :patch%>
+     </div> -->
      <p>Subtotal: <%= number_to_currency(cart.subtotal(item)) %></p>
    </div>
  <% end %>
